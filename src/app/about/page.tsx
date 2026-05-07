@@ -99,11 +99,11 @@ const AboutPage = () => {
             </div>
 
             {/* Stats Section */}
-            <div className="py-16 bg-gradient-to-r from-orange-50 to-red-50">
+            <div className="py-16 bg-linear-to-r from-orange-50 to-red-50">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {[
-                            { value: "50,000+", label: "Workers Protected" },
+                            { value: "40,000+", label: "Workers Protected" },
                             { value: "200+", label: "Corporate Clients" },
                             { value: "15", label: "Years Experience" },
                             { value: "Nationwide", label: "Delivery Coverage" }
