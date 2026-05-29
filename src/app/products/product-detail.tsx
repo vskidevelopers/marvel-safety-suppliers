@@ -294,11 +294,11 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                         </div>
 
                         {/* CTA Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-4">
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                             <button
                                 onClick={handleAddToCart}
                                 disabled={!product.inStock}
-                                className={`flex-1 py-4 rounded-lg font-bold text-lg transition-colors ${product.inStock
+                                className={`flex-1 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg transition-colors ${product.inStock
                                     ? "bg-orange-600 hover:bg-orange-700 text-white"
                                     : "bg-gray-300 text-gray-500 cursor-not-allowed"
                                     }`}
@@ -310,9 +310,10 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                                 productId={product.id}
                                 size="md"
                                 variant="default"
+                                className="flex-1"
                             />
-                            <Link href="/quote">
-                                <button className="flex-1 border-2 border-gray-300 hover:border-orange-600 text-gray-700 hover:text-orange-600 py-4 rounded-lg font-bold transition-colors">
+                            <Link href="/quote" className="flex-1">
+                                <button className="w-full border-2 border-gray-300 hover:border-orange-600 text-gray-700 hover:text-orange-600 py-3 sm:py-4 rounded-lg font-bold text-base sm:text-lg transition-colors">
                                     Request Quote
                                 </button>
                             </Link>
