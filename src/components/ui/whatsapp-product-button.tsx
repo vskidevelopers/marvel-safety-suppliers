@@ -8,6 +8,7 @@ interface WhatsAppProductButtonProps {
   productId: string;
   variant?: "default" | "outline";
   size?: "sm" | "md" | "lg";
+  className?: string;
 }
 
 export default function WhatsAppProductButton({
@@ -15,11 +16,12 @@ export default function WhatsAppProductButton({
   productId,
   variant = "default",
   size = "md",
+  className = "",
 }: WhatsAppProductButtonProps) {
   const sizeClasses = {
     sm: "px-3 py-1.5 text-sm",
-    md: "px-4 py-2 text-base",
-    lg: "px-6 py-3 text-lg",
+    md: "px-4 py-3 text-base",
+    lg: "px-6 py-4 text-lg",
   };
 
   const variantClasses = {
@@ -32,10 +34,10 @@ export default function WhatsAppProductButton({
       href={getWhatsAppProductUrl(productName, productId)}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center gap-2 rounded-lg transition-all duration-300 font-medium ${sizeClasses[size]} ${variantClasses[variant]}`}
+      className={`flex items-center justify-center gap-2 rounded-lg transition-all duration-300 font-medium ${sizeClasses[size]} ${variantClasses[variant]} ${className}`}
     >
-      <MessageCircle className="w-4 h-4" />
-      Ask about this product
+      <MessageCircle className="w-5 h-5" />
+      <span>Ask about this product</span>
     </a>
   );
 }
