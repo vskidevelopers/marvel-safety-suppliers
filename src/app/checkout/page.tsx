@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ShieldCheck, Smartphone, Truck, MapPin, Store } from "lucide-react";
+import { ShieldCheck, Smartphone, Truck, MapPin, Store, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "../context/cart-context";
 import { useOrderFunctions } from "@/lib/hooks/useOrderFunctions";
+import { getWhatsAppCheckoutUrl } from "@/lib/whatsapp";
 import type { CreateOrderData } from "../types/order";
 
 export default function CheckoutPage() {

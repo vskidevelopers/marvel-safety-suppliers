@@ -3,9 +3,10 @@
 
 import Link from "next/link";
 import { useCart } from "../context/cart-context";
+import WhatsAppCartButton from "@/components/ui/whatsapp-cart-button";
 
 export function CartSummary() {
-    const { totalPrice } = useCart();
+    const { totalPrice, items } = useCart();
 
     return (
         <div className="bg-white border rounded-lg p-6 sticky top-6">
@@ -26,12 +27,20 @@ export function CartSummary() {
                 </div>
             </div>
 
-            <Link
-                href="/checkout"
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-lg font-bold text-center block"
-            >
-                Proceed to Checkout
-            </Link>
+            <div className="space-y-3 mb-4">
+                <Link
+                    href="/checkout"
+                    className="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-lg font-bold text-center block"
+                >
+                    Proceed to Checkout
+                </Link>
+
+                <WhatsAppCartButton
+                    items={items}
+                    totalPrice={totalPrice}
+                    className="w-full"
+                />
+            </div>
 
             <p className="text-gray-500 text-sm mt-4 text-center">
                 Nationwide delivery • KEBS-certified products

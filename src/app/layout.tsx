@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { Footer } from "@/components/ui/Footer";
 import { CartProvider } from "./context/cart-context";
+import WhatsAppButton from "@/components/ui/whatsapp-button";
 
 
 export default async function RootLayout({
@@ -38,6 +39,7 @@ export default async function RootLayout({
               richColors // ← Safety-orange accents
             />
             <Footer />
+            <WhatsAppButton />
           </CartProvider>
         </AuthProvider >
         {/* </ConvexClientProvider> */}

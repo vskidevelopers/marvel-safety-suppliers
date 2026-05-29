@@ -7,6 +7,7 @@ import { useCart } from "@/app/context/cart-context";
 import { toast } from "sonner";
 import { CartItem } from "../types/cart";
 import { useProducts } from "@/lib/hooks/useProducts";
+import WhatsAppProductButton from "@/components/ui/whatsapp-product-button";
 
 // ✅ Simplified product interface (only essential fields)
 interface Product {
@@ -304,6 +305,12 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                             >
                                 {product.inStock ? "Add to Cart" : "Out of Stock"}
                             </button>
+                            <WhatsAppProductButton 
+                                productName={product.name}
+                                productId={product.id}
+                                size="md"
+                                variant="default"
+                            />
                             <Link href="/quote">
                                 <button className="flex-1 border-2 border-gray-300 hover:border-orange-600 text-gray-700 hover:text-orange-600 py-4 rounded-lg font-bold transition-colors">
                                     Request Quote
