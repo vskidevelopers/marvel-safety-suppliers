@@ -18,23 +18,24 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-    const [items, setItems] = useState<CartItem[]>(() => {
-        if (typeof window !== "undefined") {
-            const saved = localStorage.getItem("marvel-cart");
-            try {
-                const parsed = JSON.parse(saved || '[]');
-                // ✅ Ensure it's an array
-                return Array.isArray(parsed) ? parsed : [];
-            } catch (e) {
-                return []; // fallback on parse error
-            }
-        }
-        return [];
-    });
+    const [items, setItems] = useState<CartItem[]>([]);
+    const [hasHydrated, setHasHydrated] = useState(false);
 
     useEffect(() => {
+        const saved = localStorage.getItem("marvel-cart");
+        try {
+            const parsed = JSON.parse(saved || "[]");
+            setItems(Array.isArray(parsed) ? parsed : []);
+        } catch (e) {
+            setItems([]); // fallback on parse error
+        }
+        setHasHydrated(true);
+    }, []);
+
+    useEffect(() => {
+        if (!hasHydrated) return;
         localStorage.setItem("marvel-cart", JSON.stringify(items));
-    }, [items]);
+    }, [items, hasHydrated]);
 
     const addItem = (item: Omit<CartItem, "quantity">) => {
         setItems(prev => {

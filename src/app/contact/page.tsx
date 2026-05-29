@@ -5,8 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Building } from "lucide-react";
+import { Phone, Mail, MapPin, Building, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
+import { getWhatsAppContactUrl } from "@/lib/whatsapp";
 
 interface ContactMarvelProps {
     title?: string;
@@ -99,6 +100,22 @@ const ContactMarvel = ({
                                             <p className="font-medium text-gray-900">Business Hours</p>
                                             <p className="text-gray-600">Monday - Friday: 8:00 AM - 5:00 PM</p>
                                             <p className="text-sm text-gray-500">Saturday: 9:00 AM - 5:00 PM</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="flex items-start gap-3">
+                                        <MessageCircle className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
+                                        <div>
+                                            <p className="font-medium text-gray-900">WhatsApp</p>
+                                            <a
+                                                href={getWhatsAppContactUrl()}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-green-600 hover:text-green-700 font-medium"
+                                            >
+                                                Message us instantly
+                                            </a>
+                                            <p className="text-sm text-gray-500">Get instant responses during business hours</p>
                                         </div>
                                     </div>
                                 </div>
