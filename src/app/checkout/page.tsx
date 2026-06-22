@@ -251,7 +251,7 @@ export default function CheckoutPage() {
                                         <div className="md:col-span-2 p-3 bg-green-50 text-green-800 rounded-lg text-sm">
                                             <MapPin className="h-4 w-4 inline mr-1" />
                                             You can pick up your order from our shop: 
-                                            <strong> Marvel Electronics, Nairobi CBD – Moi Avenue, 2nd Floor</strong>.
+                                            <strong> Accra towers, 2nd floor shop S-09 Accra Rd, Nairobi</strong>.
                                             We'll notify you when it's ready.
                                         </div>
                                     )}
