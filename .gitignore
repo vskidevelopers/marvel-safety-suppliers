@@ -42,3 +42,7 @@ next-env.d.ts
 
 # clerk configuration (can include secrets)
 /.clerk/
+
+# local-only planning docs, never push to GitHub
+REFERRAL_SYSTEM_PLAN.md
+WEBSITE_IMPROVEMENTS_PLAN.md

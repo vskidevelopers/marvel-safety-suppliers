@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { MOCK_PRODUCTS } from "@/lib/mock-products";
@@ -47,10 +48,12 @@ export function FeaturedProducts() {
                             className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
                         >
                             <div className="relative aspect-square bg-gray-100">
-                                <img
+                                <Image
                                     src={product.primaryImage}
                                     alt={product.name}
-                                    className="object-cover w-full h-full"
+                                    fill
+                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                    className="object-cover"
                                 />
                                 {product.certifications.length > 0 && (
                                     <span className="absolute top-2 right-2 bg-gray-900 text-white text-[10px] font-bold px-1.5 py-1 rounded">

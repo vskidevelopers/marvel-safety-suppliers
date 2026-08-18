@@ -2,7 +2,9 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Phone, Mail, Shield, Package, MessageCircle } from "lucide-react";
+import { getWhatsAppContactUrl, WHATSAPP_PHONE_NUMBER } from "@/lib/whatsapp";
 
 export function Footer() {
   const pathname = usePathname();
@@ -26,13 +28,18 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <img
+              <Image
                 src="/images/marvel-footer.png"
                 alt="Marvel Safety Suppliers"
+                width={1388}
+                height={170}
                 className="h-6 w-auto"
               />
 
             </div>
+            <p className="text-orange-500 text-sm font-medium">
+              Your trusted partner for quality PPE, safety footwear, workwear and customized uniforms.
+            </p>
             <p className="text-gray-400 text-sm leading-relaxed">
               Marvel Safety is Nairobi&lsquo;s most trusted supplier of certified personal protective equipment (PPE),
               delivering premium overalls, high-visibility reflectors, dustcoats, industrial helmets, safety boots,
@@ -76,13 +83,15 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-5 w-5 text-orange-500 flex-shrink-0" />
-                <span>+254 741 900 286</span>
+                <a href={`tel:${WHATSAPP_PHONE_NUMBER}`} className="hover:text-orange-400 transition-colors">
+                  {WHATSAPP_PHONE_NUMBER}
+                </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-orange-500 flex-shrink-0" />
                 <div className="flex flex-col">
-                  <span>info@marvelsafetysuppliers.co.ke</span>
-                  <span>marvelsafetyhub@gmail.com</span>
+                  <a href="mailto:info@marvelsafetysuppliers.co.ke" className="hover:text-orange-400 transition-colors">info@marvelsafetysuppliers.co.ke</a>
+                  <a href="mailto:marvelsafetyhub@gmail.com" className="hover:text-orange-400 transition-colors">marvelsafetyhub@gmail.com</a>
                 </div>
               </li>
             </ul>
@@ -101,13 +110,13 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://wa.me/254741900286"
+                    href={getWhatsAppContactUrl()}
                     className="hover:text-orange-400 transition-colors flex items-center gap-2"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <MessageCircle className="h-4 w-4" />
-                    WhatsApp:  0741 900 286
+                    WhatsApp: {WHATSAPP_PHONE_NUMBER}
                   </a>
                 </li>
                 <li>
@@ -135,7 +144,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-6 text-center text-sm text-gray-500">
+        <div className="border-t border-gray-800 pt-6 text-center text-sm text-gray-500 space-y-1">
+          <p className="text-orange-500 font-medium">#Protecting People. Powering Businesses.</p>
           <p>&copy; {new Date().getFullYear()} Marvel Safety Kenya. All rights reserved.</p>
         </div>
       </div>

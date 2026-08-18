@@ -1,9 +1,11 @@
 "use client";
 
-import { Menu, ShoppingCart, User } from "lucide-react";
+import { Menu, MessageCircle, Phone, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getWhatsAppContactUrl, WHATSAPP_PHONE_NUMBER } from "@/lib/whatsapp";
 
 import {
     Accordion,
@@ -72,9 +74,12 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                     <div className="flex items-center gap-8">
                         <Link href="/" className="flex items-center gap-2">
                             {/* ✅ Logo */}
-                            <img
+                            <Image
                                 src="/images/marvel-logo.png"
                                 alt="Marvel Safety Suppliers"
+                                width={2081}
+                                height={1081}
+                                priority
                                 className="h-8 w-auto" // Adjust height as needed
                             />
 
@@ -132,6 +137,22 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                     </div>
 
                     <div className="flex items-center gap-3">
+                        <a
+                            href={`tel:${WHATSAPP_PHONE_NUMBER}`}
+                            className="flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-orange-600"
+                        >
+                            <Phone className="h-4 w-4" />
+                            {WHATSAPP_PHONE_NUMBER}
+                        </a>
+                        <a
+                            href={getWhatsAppContactUrl()}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 text-sm font-medium text-green-600 hover:text-green-700"
+                        >
+                            <MessageCircle className="h-4 w-4" />
+                            WhatsApp
+                        </a>
                         <Link href="/quote">
                             <Button
                                 variant="outline"
@@ -185,6 +206,24 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                         <span className="text-xl font-bold text-orange-600">Marvel Safety</span>
                     </Link>
 
+                    <div className="flex items-center gap-1">
+                        <a
+                            href={`tel:${WHATSAPP_PHONE_NUMBER}`}
+                            aria-label="Call Marvel Safety"
+                            className="flex items-center justify-center w-9 h-9 text-gray-600 hover:text-orange-600"
+                        >
+                            <Phone className="h-5 w-5" />
+                        </a>
+                        <a
+                            href={getWhatsAppContactUrl()}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="WhatsApp Marvel Safety"
+                            className="flex items-center justify-center w-9 h-9 text-green-600 hover:text-green-700"
+                        >
+                            <MessageCircle className="h-5 w-5" />
+                        </a>
+
                     <Sheet>
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="icon" className="text-gray-600 w-9 h-9">
@@ -201,6 +240,25 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                             </SheetHeader>
 
                             <div className="flex flex-col gap-5"> {/* Consistent vertical rhythm */}
+                                <div className="grid grid-cols-2 gap-2">
+                                    <a
+                                        href={`tel:${WHATSAPP_PHONE_NUMBER}`}
+                                        className="flex items-center justify-center gap-2 py-2.5 rounded-lg border border-orange-600 text-orange-600 font-medium text-sm"
+                                    >
+                                        <Phone className="h-4 w-4" />
+                                        Call Us
+                                    </a>
+                                    <a
+                                        href={getWhatsAppContactUrl()}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center gap-2 py-2.5 rounded-lg bg-green-500 hover:bg-green-600 text-white font-medium text-sm"
+                                    >
+                                        <MessageCircle className="h-4 w-4" />
+                                        WhatsApp
+                                    </a>
+                                </div>
+
                                 <div className="flex flex-col gap-1">
                                     <Link href="/" className="py-2 font-medium text-gray-700">Home</Link>
                                     <Link href="/about" className="py-2 font-medium text-gray-700">About</Link>
@@ -254,6 +312,7 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                             </div>
                         </SheetContent>
                     </Sheet>
+                    </div>
                 </div>
             </div>
         </header>
