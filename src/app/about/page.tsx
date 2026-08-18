@@ -58,6 +58,10 @@ const AboutPage = () => {
                                 which is why we source only certified products and provide expert guidance on proper PPE selection.
                             </p>
 
+                            <p className="text-lg md:text-xl font-bold text-orange-600 mb-8">
+                                Marvel = Safety + Quality + Professionalism + Reliability
+                            </p>
+
                             <div className="flex flex-wrap gap-4">
                                 <div className="flex items-center gap-2">
                                     <ShieldCheck className="h-5 w-5 text-orange-600" />
@@ -83,7 +87,7 @@ const AboutPage = () => {
                         >
                             <div className="relative h-96 rounded-2xl overflow-hidden shadow-xl border-4 border-white">
                                 <Image
-                                    src="/images/team-safety.jpg"
+                                    src="/images/team-safety.png"
                                     alt="Marvel Safety team with safety equipment"
                                     fill
                                     className="object-cover"

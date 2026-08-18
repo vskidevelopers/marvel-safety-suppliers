@@ -94,7 +94,7 @@ function WelcomeScreen() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="text-gray-600 mb-8"
           >
-            Certified Safety Gear for Kenya
+            Quality. Protection. Professionalism.
           </motion.p>
 
           {/* Loading Indicator */}
@@ -129,13 +129,21 @@ function WelcomeScreen() {
 
 // ========== MAIN HOME PAGE ==========
 export default function HomePage() {
+  // Start true on both server and client (avoids a hydration mismatch),
+  // then immediately skip it client-side if this session has already seen
+  // it — so returning visitors aren't blocked from contact info every time.
   const [showWelcome, setShowWelcome] = useState(true);
 
   useEffect(() => {
-    // Automatically hide welcome screen after 3 seconds
+    if (sessionStorage.getItem("marvel-welcome-seen")) {
+      setShowWelcome(false);
+      return;
+    }
+
+    sessionStorage.setItem("marvel-welcome-seen", "1");
     const timer = setTimeout(() => {
       setShowWelcome(false);
-    }, 3000);
+    }, 1500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -150,6 +158,13 @@ export default function HomePage() {
       <header className="py-2">
         <HeroSlider />
       </header>
+
+      {/* Brand Slogan */}
+      <div className="bg-orange-50 py-4 border-y border-orange-100">
+        <p className="text-center text-sm md:text-base font-medium text-gray-800 px-4">
+          Marvel Safety Suppliers — Your trusted partner for quality PPE, safety footwear, workwear and customized uniforms.
+        </p>
+      </div>
 
       {/* Trust Badges */}
       <TrustBadges />

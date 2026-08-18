@@ -69,12 +69,12 @@ export async function generateMetadata({
   searchParams?: { [key: string]: string | string[] | undefined };
 }): Promise<Metadata> {
   return {
-    title: "Marvel Safety – Certified PPE Supplier in Kenya",
-    description: "Buy certified safety equipment including hard hats, gloves, masks, and high-visibility gear. Nationwide delivery across Kenya.",
+    title: "Marvel Safety Suppliers – Your Trusted Partner for Quality PPE, Safety Footwear, Workwear & Custom Uniforms",
+    description: "Marvel Safety Suppliers – your trusted partner for quality PPE, safety footwear, workwear and customized uniforms. KEBS-certified safety equipment with nationwide delivery across Kenya.",
     keywords: "safety equipment Kenya, PPE supplier Nairobi, hard hats, safety gloves, KEBS certified",
     openGraph: {
-      title: "Marvel Safety – Certified PPE Supplier",
-      description: "Kenya's trusted safety equipment supplier",
+      title: "Marvel Safety Suppliers – Your Trusted Partner for Quality PPE",
+      description: "Your trusted partner for quality PPE, safety footwear, workwear and customized uniforms.",
       url: "https://marvelsafety.co.ke",
       siteName: "Marvel Safety",
       locale: "en_KE",
