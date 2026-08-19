@@ -10,16 +10,17 @@ import { useProducts } from "@/lib/hooks/useProducts";
 export function ProductGrid() {
     const searchParams = useSearchParams();
     const category = searchParams.get("category");
+    const search = searchParams.get("search")?.trim().toLowerCase() ?? "";
     const { products, loading, error } = useProducts();
 
-
-    // const filtered = category
-    //     ? MOCK_PRODUCTS.filter(p => p.category === category)
-    //     : MOCK_PRODUCTS;
-
-    const filtered = category
-        ? products.filter(p => p.category === category)
-        : products;
+    const filtered = products.filter((p) => {
+        const matchesCategory = !category || p.category === category;
+        const matchesSearch =
+            !search ||
+            p.name.toLowerCase().includes(search) ||
+            p.sku?.toLowerCase().includes(search);
+        return matchesCategory && matchesSearch;
+    });
 
 
 
@@ -34,7 +35,9 @@ export function ProductGrid() {
     if (filteredProducts.length === 0) {
         return (
             <div className="text-center py-12">
-                <p className="text-gray-500">No filteredProducts match your filter</p>
+                <p className="text-gray-500">
+                    {search ? `No products match "${searchParams.get("search")}"` : "No products match your filter"}
+                </p>
                 <button
                     onClick={() => window.history.back()}
                     className="mt-4 text-orange-600 hover:underline text-sm"

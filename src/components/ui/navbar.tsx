@@ -3,9 +3,11 @@
 import { Menu, MessageCircle, Phone, ShoppingCart, User } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getWhatsAppContactUrl, WHATSAPP_PHONE_NUMBER } from "@/lib/whatsapp";
+import { SearchBar } from "./search-bar";
 
 import {
     Accordion,
@@ -64,10 +66,30 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
     if (pathname?.startsWith("/admin")) return null
 
     return (
-        <header
-            className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/90 backdrop-blur-sm shadow-sm" : "bg-white"
-                }`}
-        >
+        <>
+            {/* Call/WhatsApp order strip — scrolls away with the page, like Jumia's */}
+            <div className="bg-orange-600 text-white text-center py-1.5 px-4 text-xs sm:text-sm font-medium flex items-center justify-center gap-1.5">
+                <span className="relative flex h-4 w-4 shrink-0">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-white/60 animate-ping" />
+                    <motion.span
+                        animate={{ rotate: [0, -18, 18, -12, 12, 0] }}
+                        transition={{ duration: 1.4, repeat: Infinity, repeatDelay: 1.6, ease: "easeInOut" }}
+                        className="relative inline-flex h-4 w-4 items-center justify-center rounded-full bg-white/20"
+                    >
+                        <Phone className="h-2.5 w-2.5 text-white" fill="currentColor" />
+                    </motion.span>
+                </span>
+                Call or WhatsApp{" "}
+                <a href={`tel:${WHATSAPP_PHONE_NUMBER}`} className="font-bold underline underline-offset-2">
+                    {WHATSAPP_PHONE_NUMBER}
+                </a>{" "}
+                to order
+            </div>
+
+            <header
+                className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? "bg-white/90 backdrop-blur-sm shadow-sm" : "bg-white"
+                    }`}
+            >
             <div className="container px-4 md:px-6 py-3"> {/* Consistent container padding */}
                 {/* Desktop Nav */}
                 <nav className="hidden items-center justify-between lg:flex">
@@ -203,7 +225,14 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                 {/* Mobile Nav */}
                 <div className="flex items-center justify-between lg:hidden">
                     <Link href="/" className="flex items-center gap-2">
-                        <span className="text-xl font-bold text-orange-600">Marvel Safety</span>
+                        <Image
+                            src="/images/marvel-logo.png"
+                            alt="Marvel Safety Suppliers"
+                            width={2081}
+                            height={1081}
+                            priority
+                            className="h-8 w-auto"
+                        />
                     </Link>
 
                     <div className="flex items-center gap-1">
@@ -234,7 +263,13 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                             <SheetHeader className="mb-6">
                                 <SheetTitle>
                                     <Link href="/" className="flex items-center gap-2">
-                                        <span className="text-xl font-bold text-orange-600">Marvel Safety</span>
+                                        <Image
+                                            src="/images/marvel-logo.png"
+                                            alt="Marvel Safety Suppliers"
+                                            width={2081}
+                                            height={1081}
+                                            className="h-8 w-auto"
+                                        />
                                     </Link>
                                 </SheetTitle>
                             </SheetHeader>
@@ -314,7 +349,15 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                     </Sheet>
                     </div>
                 </div>
+
+                {/* Search bar — sticky with the header, every page */}
+                <div className="pt-2 lg:pt-3">
+                    <Suspense fallback={<div className="h-11 rounded-full bg-gray-100 animate-pulse" />}>
+                        <SearchBar />
+                    </Suspense>
+                </div>
             </div>
-        </header>
+            </header>
+        </>
     );
 }

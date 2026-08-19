@@ -7,13 +7,13 @@ export function ProductCard({
 }) {
     return (
         <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-            <div className="aspect-square bg-gray-50 relative">
+            <div className="aspect-square bg-gray-50 relative p-2">
                 <Image
                     src={product.image}
                     alt={product.name}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                    className="object-cover"
+                    className="object-contain"
                 />
                 <div className="absolute top-2 left-2 bg-white/90 text-orange-600 text-[10px] font-bold px-1.5 py-0.5 rounded">
                     In Stock

@@ -43,26 +43,18 @@ const WEARABLE_CATEGORIES = [
 
 export function SafetyCategories() {
     return (
-        <section className="py-16 bg-white">
+        <section className="py-8 md:py-12 bg-white">
             <div className="container mx-auto px-4">
-                {/* Enhanced Title */}
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                        Essential Safety Categories
-                    </h2>
-                    <div className="w-24 h-1 bg-orange-600 mx-auto rounded-full"></div>
-                    <p className="text-gray-600 mt-6 max-w-2xl mx-auto">
-                        KEBS-certified PPE for every industry in Kenya — from Nairobi construction sites to rural apiaries.
-                    </p>
-                </div>
+                <h2 className="text-lg md:text-2xl font-bold text-gray-900 mb-5">
+                    Shop by Category
+                </h2>
 
-                {/* Category Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Category Grid — compact circular icons, mobile-first */}
+                <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-6 gap-x-3 gap-y-6">
                     {WEARABLE_CATEGORIES.map((category, index) => (
                         <CategoryCard
                             key={index}
                             name={category.name}
-                            description={category.description}
                             link={category.link}
                             imageUrl={category.imageUrl}
                         />
