@@ -92,9 +92,19 @@ function WelcomeScreen() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="text-gray-600 mb-8"
+            className="text-gray-700 font-medium mb-2"
           >
             Quality. Protection. Professionalism.
+          </motion.p>
+
+          {/* Full Slogan */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            className="text-gray-500 text-sm leading-relaxed mb-8 px-4"
+          >
+            Your trusted partner for quality PPE, safety footwear, workwear and customized uniforms.
           </motion.p>
 
           {/* Loading Indicator */}
@@ -154,30 +164,28 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Brand Slogan */}
+      <div className="bg-gradient-to-r from-orange-600 to-red-600 py-3">
+        <p className="text-center text-xs sm:text-sm md:text-base font-semibold tracking-wide text-white px-4">
+          <span className="font-bold">Marvel Safety Suppliers</span>
+          <span className="text-orange-100 mx-1.5">—</span>
+          Your trusted partner for quality PPE, safety footwear, workwear and customized uniforms.
+        </p>
+      </div>
+
       {/* Hero Section */}
       <header className="py-2">
         <HeroSlider />
       </header>
 
-      {/* Brand Slogan */}
-      <div className="bg-orange-50 py-4 border-y border-orange-100">
-        <p className="text-center text-sm md:text-base font-medium text-gray-800 px-4">
-          Marvel Safety Suppliers — Your trusted partner for quality PPE, safety footwear, workwear and customized uniforms.
-        </p>
-      </div>
+      {/* Main Content */}
+      <SafetyCategories />
+
+      {/* Featured Products */}
+      <FeaturedProducts />
 
       {/* Trust Badges */}
       <TrustBadges />
-
-      {/* Main Content */}
-      <main className="container py-12 w-full mx-auto px-4">
-        <SafetyCategories />
-      </main>
-
-      {/* Featured Products */}
-      <div className="text-center mt-12">
-        <FeaturedProducts />
-      </div>
 
       {/* Partners */}
       <PartnersSection />

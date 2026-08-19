@@ -65,7 +65,7 @@ export function HeroSlider() {
     const prevSlide = () => setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
 
     return (
-        <section className="relative h-[600px] w-full overflow-hidden bg-gray-900 text-white">
+        <section className="relative h-48 sm:h-64 md:h-80 lg:h-[420px] w-full overflow-hidden bg-gray-900 text-white">
             {/* Background gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40 z-10" />
 
