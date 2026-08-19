@@ -101,7 +101,7 @@ export function HeroSlider() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.6 }}
-                        className="inline-block bg-orange-600/90 text-white px-4 py-1.5 rounded-full text-sm font-bold mb-6 backdrop-blur-sm border border-orange-500/30"
+                        className="hidden sm:inline-block bg-orange-600/90 text-white px-3 py-1 rounded-full text-xs md:text-sm font-bold mb-2 md:mb-6 backdrop-blur-sm border border-orange-500/30"
                     >
                         KEBS Certified • Nairobi Based
                     </motion.div>
@@ -110,7 +110,7 @@ export function HeroSlider() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3, duration: 0.6 }}
-                        className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
+                        className="text-base sm:text-2xl md:text-4xl lg:text-6xl font-bold mb-1 sm:mb-3 md:mb-6 leading-tight line-clamp-2"
                     >
                         {slides[current].title}
                     </motion.h1>
@@ -119,7 +119,7 @@ export function HeroSlider() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4, duration: 0.6 }}
-                        className="text-lg text-gray-200 mb-8 leading-relaxed max-w-xl"
+                        className="hidden sm:block text-sm md:text-lg text-gray-200 mb-3 md:mb-8 leading-relaxed max-w-xl line-clamp-2"
                     >
                         {slides[current].subtitle}
                     </motion.p>
@@ -128,17 +128,17 @@ export function HeroSlider() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.5, duration: 0.6 }}
-                        className="flex flex-col sm:flex-row gap-4"
+                        className="flex flex-col sm:flex-row gap-2 md:gap-4"
                     >
                         <Link
                             href={slides[current].link}
-                            className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-md font-bold text-center transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-orange-500/20"
+                            className="bg-orange-600 hover:bg-orange-700 text-white px-3 py-1.5 text-xs sm:px-6 sm:py-3 sm:text-sm md:px-8 md:py-4 md:text-base rounded-md font-bold text-center transition-colors flex items-center justify-center gap-1.5 md:gap-2 shadow-lg hover:shadow-orange-500/20 w-fit"
                         >
-                            {slides[current].cta} <ArrowRight className="h-5 w-5" />
+                            {slides[current].cta} <ArrowRight className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
                         </Link>
                         <Link
                             href="/quote"
-                            className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-8 py-4 rounded-md font-bold text-center transition-colors backdrop-blur-sm hover:border-white/50"
+                            className="hidden sm:flex bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 text-sm md:text-base rounded-md font-bold text-center items-center justify-center transition-colors backdrop-blur-sm hover:border-white/50 w-fit"
                         >
                             Request Bulk Quote
                         </Link>
@@ -163,14 +163,14 @@ export function HeroSlider() {
             </button>
 
             {/* Dots (All screens) */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-2">
+            <div className="absolute bottom-2 md:bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-1.5 md:gap-2">
                 {slides.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => setCurrent(index)}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${index === current
-                            ? "bg-orange-500 w-10 rounded-full"
-                            : "bg-white/50 hover:bg-white/80"
+                        className={`h-1.5 md:h-3 rounded-full transition-all duration-300 ${index === current
+                            ? "bg-orange-500 w-6 md:w-10"
+                            : "bg-white/50 hover:bg-white/80 w-1.5 md:w-3"
                             }`}
                         aria-label={`Go to slide ${index + 1}`}
                     />
