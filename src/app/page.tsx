@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, HardHat, Eye, Footprints } from "lucide-react";
 import { HeroSlider } from "@/sections/HomePageHeroSlider";
@@ -72,9 +73,20 @@ function WelcomeScreen() {
             }}
             className="mb-6"
           >
-            <div className="w-20 h-20 bg-orange-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-              <ShieldCheck className="h-10 w-10 text-white" />
-            </div>
+            <motion.div
+              animate={{ scale: [1, 1.06, 1] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="mx-auto mb-4 w-fit"
+            >
+              <Image
+                src="/images/marvel-logo.png"
+                alt="Marvel Safety Suppliers"
+                width={2081}
+                height={1081}
+                priority
+                className="h-16 w-auto"
+              />
+            </motion.div>
           </motion.div>
 
           {/* Title */}
@@ -165,9 +177,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Brand Slogan */}
-      <div className="bg-gradient-to-r from-orange-600 to-red-600 py-3">
-        <p className="text-center text-xs sm:text-sm md:text-base font-semibold tracking-wide text-white px-4">
-          <span className="font-bold">Marvel Safety Suppliers</span>
+      <div className="bg-gradient-to-r from-orange-600 to-red-600 py-4 sm:py-5">
+        <p className="text-center text-base sm:text-xl md:text-2xl font-bold tracking-wide text-white px-4 leading-snug">
+          <span className="font-extrabold">Marvel Safety Suppliers</span>
           <span className="text-orange-100 mx-1.5">—</span>
           Your trusted partner for quality PPE, safety footwear, workwear and customized uniforms.
         </p>

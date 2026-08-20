@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { fetchFeaturedProducts } from "@/lib/firebase";
 import { ProductImage } from "@/components/ui/product-image";
+import { LogoLoader } from "@/components/ui/logo-loader";
 import type { Product } from "@/app/types/product";
 
 export function FeaturedProducts() {
@@ -29,20 +28,7 @@ export function FeaturedProducts() {
     if (loading) {
         return (
             <section className="py-10 md:py-16 bg-gray-50 w-full">
-                <div className="container mx-auto px-4 flex flex-col items-center justify-center gap-3">
-                    <motion.div
-                        animate={{ opacity: [0.3, 1, 0.3] }}
-                        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                    >
-                        <Image
-                            src="/images/marvel-logo.png"
-                            alt="Loading"
-                            width={2081}
-                            height={1081}
-                            className="h-10 w-auto"
-                        />
-                    </motion.div>
-                </div>
+                <LogoLoader />
             </section>
         );
     }

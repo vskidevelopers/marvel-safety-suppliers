@@ -6,19 +6,12 @@ import { ProductSidebar } from "./sidebar";
 import { FiltersModal } from "./filters-modal";
 import { ProductsHeader } from "./products-header";
 import { useProducts } from "@/lib/hooks/useProducts";
+import { LogoLoader } from "@/components/ui/logo-loader";
 
 export default function ProductsPage() {
   const { loading, error } = useProducts();
 
-  if (loading) {
-    return (
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="bg-gray-100 aspect-square rounded-lg animate-pulse" />
-        ))}
-      </div>
-    );
-  }
+  if (loading) return <LogoLoader className="py-24" />;
   if (error) return <div className="p-8 text-red-600">Error: {error}</div>;
 
   return (
