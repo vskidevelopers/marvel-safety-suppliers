@@ -11,11 +11,15 @@ import {
   getDocs,
   deleteDoc,
   getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
   updateDoc,
   serverTimestamp,
   query,
   where,
   orderBy,
+  limit,
 } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -36,7 +40,18 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+
+// Persistent local cache (IndexedDB) so repeat reads of the same products/quotes
+// come back instantly instead of round-tripping to Firestore every time — falls
+// back to the plain in-memory client on the server, since IndexedDB doesn't exist there.
+export const db =
+  typeof window !== "undefined"
+    ? initializeFirestore(app, {
+        localCache: persistentLocalCache({
+          tabManager: persistentMultipleTabManager(),
+        }),
+      })
+    : getFirestore(app);
 
 // ////////////////////////////
 //   Auth Related Functions //
@@ -91,44 +106,60 @@ export const useAuthenticationFunctions = () => {
 //   Product Related Functions //
 // /////////////////////////////
 
+// Shared field-fallback mapping so every product read (full list or featured) is consistent
+function mapProductDoc(doc) {
+  const data = doc.data();
+  return {
+    id: doc.id,
+    name: data.name || "Unnamed Product",
+    slug: data.slug || doc.id,
+    sku: data.sku || "NO-SKU",
+    price: data.price || 0,
+    oldPrice: data.oldPrice,
+    category: data.category || "Uncategorized",
+    description: data.description || "",
+    shortDescription: data.shortDescription || "",
+    primaryImage: data.primaryImage || "/placeholder-product.svg",
+    additionalImages: data.additionalImages || [],
+    certifications: data.certifications || [],
+    inStock: data.inStock || false,
+    stockCount: data.stockCount || 0,
+    status: data.status || "active",
+    specs: data.specs || {},
+    features: data.features || [],
+    applications: data.applications || [],
+    metaTitle: data.metaTitle,
+    metaDescription: data.metaDescription,
+    createdAt: data.createdAt,
+    updatedAt: data.updatedAt,
+  };
+}
+
 // ✅ Fetch all products
 export async function fetchAllProducts() {
   try {
     const productsSnapshot = await getDocs(collection(db, "products"));
-
-    const products = productsSnapshot.docs.map((doc) => {
-      const data = doc.data();
-
-      // ✅ Provide fallbacks for missing fields
-      return {
-        id: doc.id,
-        name: data.name || "Unnamed Product",
-        slug: data.slug || doc.id,
-        sku: data.sku || "NO-SKU",
-        price: data.price || 0,
-        oldPrice: data.oldPrice,
-        category: data.category || "Uncategorized",
-        description: data.description || "",
-        shortDescription: data.shortDescription || "",
-        primaryImage: data.primaryImage || "/placeholder-image.jpg",
-        additionalImages: data.additionalImages || [],
-        certifications: data.certifications || [],
-        inStock: data.inStock || false,
-        stockCount: data.stockCount || 0,
-        status: data.status || "active",
-        specs: data.specs || {},
-        features: data.features || [],
-        applications: data.applications || [],
-        metaTitle: data.metaTitle,
-        metaDescription: data.metaDescription,
-        createdAt: data.createdAt,
-        updatedAt: data.updatedAt,
-      };
-    });
-
+    const products = productsSnapshot.docs.map(mapProductDoc);
     return { success: true, data: products };
   } catch (error) {
     console.error("❌ [Firebase] fetchAllProducts error:", error);
+    return { success: false, error: error.message };
+  }
+}
+
+// ✅ Fetch a handful of in-stock products for homepage "Popular Safety Gear" —
+// asks Firestore for just `count` docs instead of pulling the whole catalog
+export async function fetchFeaturedProducts(count = 4) {
+  try {
+    const q = query(
+      collection(db, "products"),
+      where("inStock", "==", true),
+      limit(count),
+    );
+    const snapshot = await getDocs(q);
+    return { success: true, data: snapshot.docs.map(mapProductDoc) };
+  } catch (error) {
+    console.error("❌ [Firebase] fetchFeaturedProducts error:", error);
     return { success: false, error: error.message };
   }
 }

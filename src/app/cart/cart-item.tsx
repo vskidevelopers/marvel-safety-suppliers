@@ -19,12 +19,12 @@ export function CartItemComponent({ item }: { item: CartItem }) {
                 className="w-20 h-20 flex-shrink-0"
             >
                 <img
-                    src={item.image || "/placeholder-product.jpg"}
+                    src={item.image || "/placeholder-product.svg"}
                     alt={item.name || "Product"}
                     className="w-full h-full object-cover rounded"
                     loading="lazy"
                     onError={(e) => {
-                        (e.target as HTMLImageElement).src = "/placeholder-product.jpg";
+                        (e.target as HTMLImageElement).src = "/placeholder-product.svg";
                     }}
                 />
             </Link>

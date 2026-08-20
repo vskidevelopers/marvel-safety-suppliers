@@ -175,7 +175,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                                 alt={product.name}
                                 className="max-h-full max-w-full object-contain p-4"
                                 onError={(e) => {
-                                    (e.target as HTMLImageElement).src = "/placeholder-product.jpg";
+                                    (e.target as HTMLImageElement).src = "/placeholder-product.svg";
                                 }}
                             />
                         </div>
@@ -198,7 +198,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                                             className="w-full h-full object-cover"
                                             onError={(e) => {
                                                 (e.target as HTMLImageElement).src =
-                                                    "/placeholder-thumb.jpg";
+                                                    "/placeholder-product.svg";
                                             }}
                                         />
                                     </div>
