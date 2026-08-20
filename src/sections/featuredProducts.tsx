@@ -1,29 +1,32 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { MOCK_PRODUCTS } from "@/lib/mock-products";
-
-// Select 4 featured products (in-stock, from key categories)
-const getFeaturedProducts = () => {
-    return MOCK_PRODUCTS
-        .filter(p => p.inStock)
-        .sort(() => 0.5 - Math.random()) // shuffle
-        .slice(0, 4);
-};
+import { useProducts } from "@/lib/hooks/useProducts";
 
 export function FeaturedProducts() {
-    const [featured, setFeatured] = useState(MOCK_PRODUCTS.slice(0, 4));
+    const { products, loading } = useProducts();
+    const featured = products.filter((p) => p.inStock).slice(0, 4);
 
-    useEffect(() => {
-        // Simulate "fetching from DB" with slight delay
-        const timer = setTimeout(() => {
-            setFeatured(getFeaturedProducts());
-        }, 300);
-        return () => clearTimeout(timer);
-    }, []);
+    if (loading) {
+        return (
+            <section className="py-6 md:py-10 bg-gray-50 w-full">
+                <div className="container mx-auto px-4">
+                    <div className="flex justify-between items-end mb-4">
+                        <h2 className="text-lg md:text-2xl font-bold text-gray-900">Popular Safety Gear</h2>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+                        {[...Array(4)].map((_, i) => (
+                            <div key={i} className="bg-gray-100 aspect-square rounded-lg animate-pulse" />
+                        ))}
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    if (featured.length === 0) return null;
 
     return (
         <section className="py-6 md:py-10 bg-gray-50 w-full">
@@ -39,7 +42,7 @@ export function FeaturedProducts() {
                     {featured.map((product) => (
                         <Link
                             key={product.id}
-                            href="/products"
+                            href={`/products/${product.id}`}
                             className="block bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
                         >
                             <div className="relative aspect-square bg-gray-50 p-2">
