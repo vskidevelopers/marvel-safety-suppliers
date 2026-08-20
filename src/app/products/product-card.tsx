@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ProductImage } from "@/components/ui/product-image";
 
 export function ProductCard({
     product
@@ -8,10 +8,9 @@ export function ProductCard({
     return (
         <div className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
             <div className="aspect-square bg-gray-50 relative p-2">
-                <Image
+                <ProductImage
                     src={product.image}
                     alt={product.name}
-                    fill
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                     className="object-contain"
                 />

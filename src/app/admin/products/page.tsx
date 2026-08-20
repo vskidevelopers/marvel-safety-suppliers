@@ -239,7 +239,7 @@ export default function AdminProductsPage() {
                                                             alt={product.name}
                                                             className="w-full h-full object-cover"
                                                             onError={(e) => {
-                                                                (e.target as HTMLImageElement).src = "/placeholder-image.jpg";
+                                                                (e.target as HTMLImageElement).src = "/placeholder-product.svg";
                                                             }}
                                                         />
                                                     </div>

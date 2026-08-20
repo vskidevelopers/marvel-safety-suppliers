@@ -1,29 +1,39 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { MOCK_PRODUCTS } from "@/lib/mock-products";
-
-// Select 4 featured products (in-stock, from key categories)
-const getFeaturedProducts = () => {
-    return MOCK_PRODUCTS
-        .filter(p => p.inStock)
-        .sort(() => 0.5 - Math.random()) // shuffle
-        .slice(0, 4);
-};
+import { fetchFeaturedProducts } from "@/lib/firebase";
+import { ProductImage } from "@/components/ui/product-image";
+import { LogoLoader } from "@/components/ui/logo-loader";
+import type { Product } from "@/app/types/product";
 
 export function FeaturedProducts() {
-    const [featured, setFeatured] = useState(MOCK_PRODUCTS.slice(0, 4));
+    const [featured, setFeatured] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Simulate "fetching from DB" with slight delay
-        const timer = setTimeout(() => {
-            setFeatured(getFeaturedProducts());
-        }, 300);
-        return () => clearTimeout(timer);
+        let cancelled = false;
+        (async () => {
+            const result = await fetchFeaturedProducts(4);
+            if (cancelled) return;
+            if (result.success) setFeatured(result.data as Product[]);
+            setLoading(false);
+        })();
+        return () => {
+            cancelled = true;
+        };
     }, []);
+
+    if (loading) {
+        return (
+            <section className="py-10 md:py-16 bg-gray-50 w-full">
+                <LogoLoader />
+            </section>
+        );
+    }
+
+    if (featured.length === 0) return null;
 
     return (
         <section className="py-6 md:py-10 bg-gray-50 w-full">
@@ -39,14 +49,13 @@ export function FeaturedProducts() {
                     {featured.map((product) => (
                         <Link
                             key={product.id}
-                            href="/products"
+                            href={`/products/${product.id}`}
                             className="block bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
                         >
                             <div className="relative aspect-square bg-gray-50 p-2">
-                                <Image
+                                <ProductImage
                                     src={product.primaryImage}
                                     alt={product.name}
-                                    fill
                                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                                     className="object-contain"
                                 />

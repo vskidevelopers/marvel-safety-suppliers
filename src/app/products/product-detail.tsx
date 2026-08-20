@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { CartItem } from "../types/cart";
 import { useProducts } from "@/lib/hooks/useProducts";
 import WhatsAppProductButton from "@/components/ui/whatsapp-product-button";
+import { LogoLoader } from "@/components/ui/logo-loader";
 
 // ✅ Simplified product interface (only essential fields)
 interface Product {
@@ -65,30 +66,9 @@ export function ProductDetail({ productId }: ProductDetailProps) {
         loadProduct();
     }, [productId]);
 
-    // ✅ Loading skeleton
+    // ✅ Loading state
     if (loading) {
-        return (
-            <div className="container mx-auto px-4 py-8">
-                <div className="animate-pulse space-y-6">
-                    <div className="h-6 bg-gray-200 rounded w-1/3"></div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <div className="space-y-4">
-                            <div className="aspect-square bg-gray-200 rounded-lg"></div>
-                            <div className="grid grid-cols-4 gap-2">
-                                {[...Array(4)].map((_, i) => (
-                                    <div key={i} className="aspect-square bg-gray-200 rounded"></div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="space-y-4">
-                            <div className="h-8 bg-gray-200 rounded w-1/2"></div>
-                            <div className="h-12 bg-gray-200 rounded w-1/3"></div>
-                            <div className="h-24 bg-gray-200 rounded"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
+        return <LogoLoader className="py-24" />;
     }
 
     // ✅ Error state
@@ -175,7 +155,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                                 alt={product.name}
                                 className="max-h-full max-w-full object-contain p-4"
                                 onError={(e) => {
-                                    (e.target as HTMLImageElement).src = "/placeholder-product.jpg";
+                                    (e.target as HTMLImageElement).src = "/placeholder-product.svg";
                                 }}
                             />
                         </div>
@@ -198,7 +178,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
                                             className="w-full h-full object-cover"
                                             onError={(e) => {
                                                 (e.target as HTMLImageElement).src =
-                                                    "/placeholder-thumb.jpg";
+                                                    "/placeholder-product.svg";
                                             }}
                                         />
                                     </div>

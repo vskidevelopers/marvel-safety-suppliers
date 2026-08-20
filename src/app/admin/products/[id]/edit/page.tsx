@@ -203,7 +203,7 @@ export default function EditProductPage() {
                 },
                 sku: formData.sku,
                 supplier: formData.supplier,
-                primaryImage: existingImages[0] || "/placeholder-image.jpg",
+                primaryImage: existingImages[0] || "/placeholder-product.svg",
                 additionalImages: existingImages.slice(1),
                 status: parseInt(formData.stockCount) > 0
                     ? (parseInt(formData.stockCount) < 10 ? "low_stock" : "active")
