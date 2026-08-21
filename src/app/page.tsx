@@ -64,8 +64,8 @@ function WelcomeScreen() {
         >
           {/* Logo */}
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
             transition={{
               type: "spring",
               stiffness: 200,
@@ -166,7 +166,7 @@ export default function HomePage() {
     sessionStorage.setItem("marvel-welcome-seen", "1");
     const timer = setTimeout(() => {
       setShowWelcome(false);
-    }, 1500);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
