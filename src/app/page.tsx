@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShieldCheck, HardHat, Eye, Footprints } from "lucide-react";
 import { HeroSlider } from "@/sections/HomePageHeroSlider";
@@ -201,6 +202,39 @@ export default function HomePage() {
 
       {/* Partners */}
       <PartnersSection />
+
+      {/* Corporate & Bulk Orders CTA */}
+      <div className="py-16 bg-gradient-to-r from-orange-600 to-red-600">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="max-w-2xl mx-auto text-center"
+          >
+            <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
+              Shopping for One, or Outfitting a Whole Team?
+            </h2>
+            <p className="text-orange-100 text-base md:text-lg mb-8">
+              We serve individual buyers and corporate clients alike — bulk PPE, custom-branded
+              workwear, volume pricing, and nationwide delivery for businesses of any size.
+            </p>
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-block"
+            >
+              <Link
+                href="/corporate"
+                className="inline-block px-8 py-3 bg-white text-orange-600 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition-colors"
+              >
+                Corporate/Bulk Orders
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 }

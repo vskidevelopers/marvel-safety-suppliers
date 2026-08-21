@@ -103,9 +103,9 @@ export function Footer() {
               <h3 className="font-bold text-lg mb-4 text-orange-500">For Businesses</h3>
               <ul className="space-y-2 text-sm text-gray-300">
                 <li>
-                  <Link href="/quote" className="hover:text-orange-400 transition-colors flex items-center gap-2">
+                  <Link href="/corporate" className="hover:text-orange-400 transition-colors flex items-center gap-2">
                     <Package className="h-4 w-4" />
-                    Request Bulk Order Quote
+                    Corporate/Bulk Orders
                   </Link>
                 </li>
                 <li>
