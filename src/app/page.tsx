@@ -178,12 +178,17 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Brand Slogan */}
-      <div className="bg-gradient-to-r from-orange-600 to-red-600 py-4 sm:py-5">
-        <p className="text-center text-base sm:text-xl md:text-2xl font-bold tracking-wide text-white px-4 leading-snug">
+      <div className="bg-gradient-to-r from-orange-600 to-red-600 py-4 sm:py-5 overflow-hidden">
+        <motion.p
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="text-center text-base sm:text-xl md:text-2xl font-bold tracking-wide text-white px-4 leading-snug"
+        >
           <span className="font-extrabold">Marvel Safety Suppliers</span>
           <span className="text-orange-100 mx-1.5">—</span>
           Your trusted partner for quality PPE, safety footwear, workwear and customized uniforms.
-        </p>
+        </motion.p>
       </div>
 
       {/* Hero Section */}
@@ -197,14 +202,8 @@ export default function HomePage() {
       {/* Featured Products */}
       <FeaturedProducts />
 
-      {/* Trust Badges */}
-      <TrustBadges />
-
-      {/* Partners */}
-      <PartnersSection />
-
       {/* Corporate & Bulk Orders CTA */}
-      <div className="py-16 bg-gradient-to-r from-orange-600 to-red-600">
+      <div className="py-12 md:py-16 bg-gradient-to-r from-orange-600 to-red-600">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -235,6 +234,12 @@ export default function HomePage() {
           </motion.div>
         </div>
       </div>
+
+      {/* Trust Badges */}
+      <TrustBadges />
+
+      {/* Partners */}
+      <PartnersSection />
     </div>
   );
 }
