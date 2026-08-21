@@ -50,7 +50,7 @@ export function SafetyCategories() {
                 </h2>
 
                 {/* Category Grid — compact circular icons, mobile-first */}
-                <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-6 gap-x-3 gap-y-6">
+                <div className="grid grid-cols-3 md:grid-cols-6 gap-x-3 gap-y-6">
                     {WEARABLE_CATEGORIES.map((category, index) => (
                         <CategoryCard
                             key={index}

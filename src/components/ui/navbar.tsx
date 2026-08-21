@@ -175,13 +175,13 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                             <MessageCircle className="h-4 w-4" />
                             WhatsApp
                         </a>
-                        <Link href="/quote">
+                        <Link href="/corporate">
                             <Button
                                 variant="outline"
                                 size="sm"
                                 className="border-orange-600 text-orange-600 hover:bg-orange-50 px-3 py-1.5" /* Tighter button */
                             >
-                                Request Quote
+                                Corporate/Bulk Orders
                             </Button>
                         </Link>
                         <Link href="/cart" className="relative">
@@ -320,9 +320,9 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                                 </Accordion>
 
                                 <div className="pt-3"> {/* Reduced top padding */}
-                                    <Link href="/quote">
+                                    <Link href="/corporate">
                                         <Button className="w-full bg-orange-600 hover:bg-orange-700 h-10 text-sm px-4">
-                                            Request Quote
+                                            Corporate/Bulk Orders
                                         </Button>
                                     </Link>
                                 </div>

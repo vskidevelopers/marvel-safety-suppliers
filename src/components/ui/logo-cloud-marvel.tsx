@@ -51,7 +51,7 @@ export function MarvelLogoCloud({
                     >
                         <img
                             alt={logo.public_id.split('/').pop() || "Partner logo"}
-                            className="h-10 w-auto md:h-18 select-none grayscale hover:grayscale-0 transition-all"
+                            className="h-12 w-auto md:h-20 select-none grayscale hover:grayscale-0 transition-all"
                             src={logo.secure_url}
                             loading="lazy"
                         />
