@@ -11,7 +11,10 @@ const nextConfig: NextConfig = {
     ],
     // Optional: set default quality
     formats: ["image/avif", "image/webp"],
-    minimumCacheTTL: 60,
+    // Was 60s, meaning almost every visitor triggered a fresh, slow re-optimization
+    // of the same image. A week is safe here since Cloudinary URLs are versioned —
+    // a genuinely new upload gets a new URL, so this doesn't risk serving stale images.
+    minimumCacheTTL: 604800,
   },
 };
 

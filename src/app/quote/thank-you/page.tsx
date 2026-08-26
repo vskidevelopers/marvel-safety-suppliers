@@ -32,7 +32,7 @@ export default function QuoteThankYouPage() {
 
                 <div className="space-y-4">
                     <p className="text-sm text-gray-500">
-                        Questions? Call us directly: <strong>+254 700 123 456</strong>
+                        Questions? Call us directly: <strong>+254 741 900 286</strong>
                     </p>
 
                     <Link

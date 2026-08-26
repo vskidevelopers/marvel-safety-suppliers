@@ -153,7 +153,7 @@ export default function OrderConfirmationPage({
                                 KEBS-Certified PPE Supplier
                             </p>
                             <p className="text-xs text-gray-400 mt-2">
-                                Nairobi, Kenya | +254 700 123 456
+                                Nairobi, Kenya | +254 741 900 286
                             </p>
                         </div>
 
@@ -264,7 +264,7 @@ export default function OrderConfirmationPage({
                                 </div>
                                 <div className="flex justify-between text-gray-600">
                                     <span>VAT (16%)</span>
-                                    <span>KES {order?.totals?.vat?.toFixed(2)}</span>
+                                    <span>KES {order?.totals?.vat?.toLocaleString()}</span>
                                 </div>
                                 <div className="border-t pt-2 flex justify-between font-bold text-lg text-gray-900">
                                     <span>Total</span>
@@ -275,7 +275,7 @@ export default function OrderConfirmationPage({
 
                         <div className="p-6 border-t border-gray-200 text-center text-xs text-gray-500">
                             <p>Thank you for choosing Marvel Safety!</p>
-                            <p className="mt-1">Questions? Call +254 700 123 456</p>
+                            <p className="mt-1">Questions? Call +254 741 900 286</p>
                         </div>
                     </div>
                 </div>

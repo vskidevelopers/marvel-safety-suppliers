@@ -6,8 +6,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { getWhatsAppContactUrl, WHATSAPP_PHONE_NUMBER } from "@/lib/whatsapp";
+import { WHATSAPP_PHONE_NUMBER } from "@/lib/whatsapp";
 import { SearchBar } from "./search-bar";
+import { WhatsAppEnquiryMenu } from "@/components/ui/whatsapp-enquiry-menu";
 
 import {
     Accordion,
@@ -166,15 +167,14 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                             <Phone className="h-4 w-4" />
                             {WHATSAPP_PHONE_NUMBER}
                         </a>
-                        <a
-                            href={getWhatsAppContactUrl()}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 text-sm font-medium text-green-600 hover:text-green-700"
-                        >
-                            <MessageCircle className="h-4 w-4" />
-                            WhatsApp
-                        </a>
+                        <WhatsAppEnquiryMenu
+                            trigger={
+                                <button className="flex items-center gap-1.5 text-sm font-medium text-green-600 hover:text-green-700">
+                                    <MessageCircle className="h-4 w-4" />
+                                    WhatsApp
+                                </button>
+                            }
+                        />
                         <Link href="/corporate">
                             <Button
                                 variant="outline"
@@ -243,15 +243,16 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                         >
                             <Phone className="h-5 w-5" />
                         </a>
-                        <a
-                            href={getWhatsAppContactUrl()}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="WhatsApp Marvel Safety"
-                            className="flex items-center justify-center w-9 h-9 text-green-600 hover:text-green-700"
-                        >
-                            <MessageCircle className="h-5 w-5" />
-                        </a>
+                        <WhatsAppEnquiryMenu
+                            trigger={
+                                <button
+                                    aria-label="WhatsApp Marvel Safety"
+                                    className="flex items-center justify-center w-9 h-9 text-green-600 hover:text-green-700"
+                                >
+                                    <MessageCircle className="h-5 w-5" />
+                                </button>
+                            }
+                        />
 
                     <Sheet>
                         <SheetTrigger asChild>
@@ -283,15 +284,14 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                                         <Phone className="h-4 w-4" />
                                         Call Us
                                     </a>
-                                    <a
-                                        href={getWhatsAppContactUrl()}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center gap-2 py-2.5 rounded-lg bg-green-500 hover:bg-green-600 text-white font-medium text-sm"
-                                    >
-                                        <MessageCircle className="h-4 w-4" />
-                                        WhatsApp
-                                    </a>
+                                    <WhatsAppEnquiryMenu
+                                        trigger={
+                                            <button className="flex items-center justify-center gap-2 py-2.5 w-full rounded-lg bg-green-500 hover:bg-green-600 text-white font-medium text-sm">
+                                                <MessageCircle className="h-4 w-4" />
+                                                WhatsApp
+                                            </button>
+                                        }
+                                    />
                                 </div>
 
                                 <div className="flex flex-col gap-1">

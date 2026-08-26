@@ -16,7 +16,7 @@ const slides = [
         cta: "Shop Safety Catalog",
         link: "/products",
         color: "from-orange-500/20 to-red-500/20",
-        imageUrl: "https://res.cloudinary.com/dlmmsamck/image/upload/v1763916324/photo-1589939705384-5185137a7f0f_rkbzbx.avif"
+        imageUrl: "https://res.cloudinary.com/dlmmsamck/image/upload/f_auto,q_auto,w_1600/v1763916324/photo-1589939705384-5185137a7f0f_rkbzbx.avif"
     },
     {
         id: 2,
@@ -26,7 +26,7 @@ const slides = [
         cta: "View Bee Suits",
         link: "/products?category=body&subcategory=bee-suit",
         color: "from-amber-500/20 to-yellow-500/20",
-        imageUrl: "https://res.cloudinary.com/dlmmsamck/image/upload/v1763920511/bee-equipment_egjlf3.jpg"
+        imageUrl: "https://res.cloudinary.com/dlmmsamck/image/upload/f_auto,q_auto,w_1600/v1763920511/bee-equipment_egjlf3.jpg"
 
     },
     {
@@ -37,7 +37,7 @@ const slides = [
         cta: "Browse Masks",
         link: "/products?category=respiratory",
         color: "from-blue-500/20 to-cyan-500/20",
-        imageUrl: "https://res.cloudinary.com/dlmmsamck/image/upload/v1763920729/istockphoto-1364769270-612x612_aoqsa5.jpg"
+        imageUrl: "https://res.cloudinary.com/dlmmsamck/image/upload/f_auto,q_auto,w_1600/v1763920729/istockphoto-1364769270-612x612_aoqsa5.jpg"
     },
     {
         id: 4,
@@ -47,7 +47,7 @@ const slides = [
         cta: "See Site Safety",
         link: "/products?category=site",
         color: "from-green-500/20 to-emerald-500/20",
-        imageUrl: "https://res.cloudinary.com/dlmmsamck/image/upload/v1763920193/safety-work-personal-protective-equipment-workplace-security-generative-ai_94628-8907_xin170.avif"
+        imageUrl: "https://res.cloudinary.com/dlmmsamck/image/upload/f_auto,q_auto,w_1600/v1763920193/safety-work-personal-protective-equipment-workplace-security-generative-ai_94628-8907_xin170.avif"
     },
 ];
 
@@ -137,10 +137,10 @@ export function HeroSlider() {
                             {slides[current].cta} <ArrowRight className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
                         </Link>
                         <Link
-                            href="/quote"
+                            href="/corporate"
                             className="hidden sm:flex bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-3 md:px-8 md:py-4 text-sm md:text-base rounded-md font-bold text-center items-center justify-center transition-colors backdrop-blur-sm hover:border-white/50 w-fit"
                         >
-                            Request Bulk Quote
+                            Corporate/Bulk Orders
                         </Link>
                     </motion.div>
                 </div>

@@ -4,7 +4,8 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { MapPin, Phone, Mail, Shield, Package, MessageCircle } from "lucide-react";
-import { getWhatsAppContactUrl, WHATSAPP_PHONE_NUMBER } from "@/lib/whatsapp";
+import { WHATSAPP_PHONE_NUMBER } from "@/lib/whatsapp";
+import { WhatsAppEnquiryMenu } from "@/components/ui/whatsapp-enquiry-menu";
 
 export function Footer() {
   const pathname = usePathname();
@@ -109,18 +110,17 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href={getWhatsAppContactUrl()}
-                    className="hover:text-orange-400 transition-colors flex items-center gap-2"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    WhatsApp: {WHATSAPP_PHONE_NUMBER}
-                  </a>
+                  <WhatsAppEnquiryMenu
+                    trigger={
+                      <button className="hover:text-orange-400 transition-colors flex items-center gap-2">
+                        <MessageCircle className="h-4 w-4" />
+                        WhatsApp: {WHATSAPP_PHONE_NUMBER}
+                      </button>
+                    }
+                  />
                 </li>
                 <li>
-                  <Link href="/contact" className="hover:text-orange-400 transition-colors flex items- center gap-2">
+                  <Link href="/contact" className="hover:text-orange-400 transition-colors flex items-center gap-2">
                     <Mail className="h-4 w-4" />
                     Email for Corporate Orders
                   </Link>
