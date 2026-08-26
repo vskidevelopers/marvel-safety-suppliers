@@ -3,7 +3,7 @@
  * Generates WhatsApp click-to-chat URLs with personalized messages
  */
 
-const WHATSAPP_PHONE = "+254702399350";
+const WHATSAPP_PHONE = "+254741900286";
 const WHATSAPP_API_URL = "https://wa.me";
 
 /**
@@ -64,6 +64,15 @@ export function getWhatsAppCheckoutUrl(): string {
  */
 export function getWhatsAppContactUrl(): string {
   const message = `Hi Marvel Safety Suppliers, I have an enquiry and would like to get in touch.`;
+  return getWhatsAppEnquiryUrl(message);
+}
+
+/**
+ * Generates WhatsApp URL for a category-specific enquiry, so the message
+ * arrives with context instead of a blank "I have an enquiry"
+ */
+export function getWhatsAppCategoryEnquiryUrl(categoryName: string): string {
+  const message = `Hi Marvel Safety Suppliers, I'd like to enquire about a product in your ${categoryName} category. Could you help me with pricing and availability?`;
   return getWhatsAppEnquiryUrl(message);
 }
 

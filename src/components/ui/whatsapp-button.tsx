@@ -1,9 +1,9 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
-import { getWhatsAppContactUrl } from "@/lib/whatsapp";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { WhatsAppEnquiryMenu } from "@/components/ui/whatsapp-enquiry-menu";
 
 export default function WhatsAppButton() {
   const [isHovered, setIsHovered] = useState(false);
@@ -21,18 +21,19 @@ export default function WhatsAppButton() {
         </div>
       )}
 
-      {/* WhatsApp Button */}
-      <a
-        href={getWhatsAppContactUrl()}
-        target="_blank"
-        rel="noopener noreferrer"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="flex items-center justify-center w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 active:scale-95"
-        aria-label="Contact us on WhatsApp"
-      >
-        <MessageCircle className="w-7 h-7 text-white" />
-      </a>
+      {/* WhatsApp Button — asks what you need before opening the chat */}
+      <WhatsAppEnquiryMenu
+        trigger={
+          <button
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            className="flex items-center justify-center w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 active:scale-95"
+            aria-label="Contact us on WhatsApp"
+          >
+            <MessageCircle className="w-7 h-7 text-white" />
+          </button>
+        }
+      />
 
       {/* Mobile: Show as text on smaller screens */}
       <div className="md:hidden absolute bottom-full right-0 mb-3 text-xs text-gray-600 whitespace-nowrap">

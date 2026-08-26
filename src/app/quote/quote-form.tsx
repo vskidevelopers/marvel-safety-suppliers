@@ -234,7 +234,7 @@ export function QuoteForm() {
                 </Button>
 
                 <p className="text-center text-xs text-gray-500 mt-4">
-                    We&apos;ll contact you within 24 hours. For urgent requests, call +254 700 123 456
+                    We&apos;ll contact you within 24 hours. For urgent requests, call +254 741 900 286
                 </p>
             </form>
         </div>
