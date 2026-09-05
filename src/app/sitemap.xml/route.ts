@@ -4,9 +4,9 @@ import { collection, getDocs } from "firebase/firestore";
 export async function GET() {
   // Get all your pages
   const pages = [
-    { url: "https://marvelsafety.co.ke", lastModified: new Date() },
-    { url: "https://marvelsafety.co.ke/products", lastModified: new Date() },
-    { url: "https://marvelsafety.co.ke/contact", lastModified: new Date() },
+    { url: "https://marvelsafetysuppliers.co.ke", lastModified: new Date() },
+    { url: "https://marvelsafetysuppliers.co.ke/products", lastModified: new Date() },
+    { url: "https://marvelsafetysuppliers.co.ke/contact", lastModified: new Date() },
     // Add other static pages
   ];
 
@@ -14,7 +14,7 @@ export async function GET() {
   try {
     const productsSnapshot = await getDocs(collection(db, "products"));
     const productPages = productsSnapshot.docs.map((doc) => ({
-      url: `https://marvelsafety.co.ke/products/${doc.id}`,
+      url: `https://marvelsafetysuppliers.co.ke/products/${doc.id}`,
       lastModified: new Date(),
     }));
     pages.push(...productPages);

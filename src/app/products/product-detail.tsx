@@ -9,45 +9,29 @@ import { CartItem } from "../types/cart";
 import { useProducts } from "@/lib/hooks/useProducts";
 import WhatsAppProductButton from "@/components/ui/whatsapp-product-button";
 import { LogoLoader } from "@/components/ui/logo-loader";
-
-// ✅ Simplified product interface (only essential fields)
-interface Product {
-    id: string;
-    name: string;
-    description: string;
-    slug: string;
-    price: number;
-    oldPrice?: number;
-    inStock: boolean;
-    stockCount?: number;
-    category: string;
-    certifications: string[];
-    primaryImage: string;
-    additionalImages: string[];
-    specs: {
-        material?: string;
-        color?: string;
-        size?: string;
-        weight?: string;
-    };
-    sku: string;
-}
+import type { Product } from "@/app/types/product";
 
 interface ProductDetailProps {
     productId: string;
+    // Fetched server-side in page.tsx so the page has real content on first
+    // load (crawlers, Quality Score) instead of an empty shell. Falls back
+    // to the client fetch below if not provided.
+    initialProduct?: Product | null;
 }
 
-export function ProductDetail({ productId }: ProductDetailProps) {
-    const [product, setProduct] = useState<Product | null>(null);
-    const [selectedImage, setSelectedImage] = useState<string>("");
-    const [loading, setLoading] = useState(true);
+export function ProductDetail({ productId, initialProduct }: ProductDetailProps) {
+    const [product, setProduct] = useState<Product | null>(initialProduct ?? null);
+    const [selectedImage, setSelectedImage] = useState<string>(initialProduct?.primaryImage ?? "");
+    const [loading, setLoading] = useState(!initialProduct);
 
     const { fetchProductById } = useProducts();
     const { addItem } = useCart();
     const router = useRouter();
 
-    // ✅ Fetch product data
+    // ✅ Fetch product data (only needed if the server didn't already provide it)
     useEffect(() => {
+        if (initialProduct) return;
+
         const loadProduct = async () => {
             try {
                 const result = await fetchProductById(productId);
@@ -64,7 +48,7 @@ export function ProductDetail({ productId }: ProductDetailProps) {
         };
 
         loadProduct();
-    }, [productId]);
+    }, [productId, initialProduct]);
 
     // ✅ Loading state
     if (loading) {
