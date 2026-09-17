@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "res.cloudinary.com" }, // ← Cloudinary
       { protocol: "https", hostname: "marvelsafety.co.ke" }, // ← Your own domain (if hosting images)
       { protocol: "https", hostname: "images.unsplash.com" }, // ← Optional: for placeholder images
+      { protocol: "https", hostname: "images.pexels.com" }, // ← Stock photos for categories without real product photos yet
     ],
     // Optional: set default quality
     formats: ["image/avif", "image/webp"],

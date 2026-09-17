@@ -23,8 +23,8 @@ export function getWhatsAppEnquiryUrl(message: string): string {
 /**
  * Generates WhatsApp URL for product enquiry
  */
-export function getWhatsAppProductUrl(productName: string, productId: string): string {
-  const message = `Hi, I'm interested in ${productName}. Could you provide more details? (Product ID: ${productId})`;
+export function getWhatsAppProductUrl(productName: string): string {
+  const message = `Hi, I'm interested in ${productName}. Could you provide more details?`;
   return getWhatsAppEnquiryUrl(message);
 }
 

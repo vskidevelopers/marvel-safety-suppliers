@@ -269,9 +269,8 @@ export function ProductDetail({ productId, initialProduct }: ProductDetailProps)
                             >
                                 {product.inStock ? "Add to Cart" : "Out of Stock"}
                             </button>
-                            <WhatsAppProductButton 
+                            <WhatsAppProductButton
                                 productName={product.name}
-                                productId={product.id}
                                 size="md"
                                 variant="default"
                                 className="flex-1"

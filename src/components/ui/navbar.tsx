@@ -52,6 +52,15 @@ interface NavbarProps {
 export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) {
     const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const closeMobileMenu = () => setMobileMenuOpen(false);
+
+    // Safety net: close the mobile menu whenever the route actually changes,
+    // in case a click target inside it is ever added without an explicit
+    // closeMobileMenu() handler.
+    useEffect(() => {
+        setMobileMenuOpen(false);
+    }, [pathname]);
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -64,7 +73,7 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
 
 
     // Hide standard header on admin pages
-    if (pathname?.startsWith("/admin")) return null
+    if (pathname?.startsWith("/admin") || pathname?.startsWith("/pos")) return null
 
     return (
         <>
@@ -254,7 +263,7 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                             }
                         />
 
-                    <Sheet>
+                    <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                         <SheetTrigger asChild>
                             <Button variant="ghost" size="icon" className="text-gray-600 w-9 h-9">
                                 <Menu className="h-6 w-6" />
@@ -263,7 +272,7 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                         <SheetContent side="right" className="w-80 overflow-y-auto pt-6 pb-6 px-6"> {/* Balanced sheet padding */}
                             <SheetHeader className="mb-6">
                                 <SheetTitle>
-                                    <Link href="/" className="flex items-center gap-2">
+                                    <Link href="/" className="flex items-center gap-2" onClick={closeMobileMenu}>
                                         <Image
                                             src="/images/marvel-logo.png"
                                             alt="Marvel Safety Suppliers"
@@ -295,32 +304,33 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                                 </div>
 
                                 <div className="flex flex-col gap-1">
-                                    <Link href="/" className="py-2 font-medium text-gray-700">Home</Link>
-                                    <Link href="/about" className="py-2 font-medium text-gray-700">About</Link>
-                                    <Link href="/contact" className="py-2 font-medium text-gray-700">Contact</Link>
+                                    <Link href="/" className="py-2 font-medium text-gray-700" onClick={closeMobileMenu}>Home</Link>
+                                    <Link href="/about" className="py-2 font-medium text-gray-700" onClick={closeMobileMenu}>About</Link>
+                                    <Link href="/contact" className="py-2 font-medium text-gray-700" onClick={closeMobileMenu}>Contact</Link>
+
+                                    <Accordion type="single" collapsible>
+                                        <AccordionItem value="products" className="border-b-0">
+                                            <AccordionTrigger className="py-2 text-base font-medium text-gray-700 hover:no-underline hover:text-orange-600">
+                                                Products
+                                            </AccordionTrigger>
+                                            <AccordionContent className="mt-1 flex flex-col gap-1">
+                                                {CATEGORIES.map((cat) => (
+                                                    <Link
+                                                        key={cat.title}
+                                                        href={cat.href}
+                                                        className="py-2 text-sm font-medium text-gray-700 hover:text-orange-600"
+                                                        onClick={closeMobileMenu}
+                                                    >
+                                                        {cat.title}
+                                                    </Link>
+                                                ))}
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                    </Accordion>
                                 </div>
 
-                                <Accordion type="single" collapsible>
-                                    <AccordionItem value="products" className="border-b-0">
-                                        <AccordionTrigger className="py-2 font-semibold text-gray-800 hover:no-underline">
-                                            Products
-                                        </AccordionTrigger>
-                                        <AccordionContent className="mt-2 flex flex-col gap-1">
-                                            {CATEGORIES.map((cat) => (
-                                                <Link
-                                                    key={cat.title}
-                                                    href={cat.href}
-                                                    className="py-2 text-sm font-medium text-gray-700 hover:text-orange-600"
-                                                >
-                                                    {cat.title}
-                                                </Link>
-                                            ))}
-                                        </AccordionContent>
-                                    </AccordionItem>
-                                </Accordion>
-
                                 <div className="pt-3"> {/* Reduced top padding */}
-                                    <Link href="/corporate">
+                                    <Link href="/corporate" onClick={closeMobileMenu}>
                                         <Button className="w-full bg-orange-600 hover:bg-orange-700 h-10 text-sm px-4">
                                             Corporate/Bulk Orders
                                         </Button>
@@ -328,17 +338,17 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                                 </div>
 
                                 <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                                    <Link href="/cart" className="flex items-center gap-2">
+                                    <Link href="/cart" className="flex items-center gap-2" onClick={closeMobileMenu}>
                                         <ShoppingCart className="h-5 w-5 text-gray-600" />
                                         <span className="font-medium text-sm">Cart {cartCount > 0 ? `(${cartCount})` : ""}</span>
                                     </Link>
                                     {isAuthenticated ? (
-                                        <Link href="/admin" className="flex items-center gap-2">
+                                        <Link href="/admin" className="flex items-center gap-2" onClick={closeMobileMenu}>
                                             <User className="h-5 w-5 text-gray-600" />
                                             <span className="font-medium text-sm">Admin</span>
                                         </Link>
                                     ) : (
-                                        <Link href="/login" className="flex items-center gap-2">
+                                        <Link href="/login" className="flex items-center gap-2" onClick={closeMobileMenu}>
                                             <User className="h-5 w-5 text-gray-600" />
                                             <span className="font-medium text-sm">Login</span>
                                         </Link>

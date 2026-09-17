@@ -1,10 +1,10 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
 import { ProductCard } from "./product-card";
 // import { MOCK_PRODUCTS } from "@/lib/mock-products";
 import { useProducts } from "@/lib/hooks/useProducts";
+import { LogoLoader } from "@/components/ui/logo-loader";
 
 // ✅ Uses useSearchParams() directly - no props needed
 export function ProductGrid() {
@@ -12,6 +12,10 @@ export function ProductGrid() {
     const category = searchParams.get("category");
     const search = searchParams.get("search")?.trim().toLowerCase() ?? "";
     const { products, loading, error } = useProducts();
+
+    if (loading) {
+        return <LogoLoader className="py-24" />;
+    }
 
     const filtered = products.filter((p) => {
         const matchesCategory = !category || p.category === category;
@@ -51,9 +55,7 @@ export function ProductGrid() {
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {filteredProducts.map((product) => (
-                <Link key={product.id} href={`/products/${product.id}`}>
-                    <ProductCard product={product} />
-                </Link>
+                <ProductCard key={product.id} product={product} />
             ))}
         </div>
     );

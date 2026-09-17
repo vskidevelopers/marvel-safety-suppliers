@@ -6,6 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { fetchFeaturedProducts } from "@/lib/firebase";
 import { ProductImage } from "@/components/ui/product-image";
 import { LogoLoader } from "@/components/ui/logo-loader";
+import WhatsAppProductButton from "@/components/ui/whatsapp-product-button";
 import type { Product } from "@/app/types/product";
 
 export function FeaturedProducts() {
@@ -47,34 +48,42 @@ export function FeaturedProducts() {
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
                     {featured.map((product) => (
-                        <Link
+                        <div
                             key={product.id}
-                            href={`/products/${product.id}`}
-                            className="block bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+                            className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow flex flex-col"
                         >
-                            <div className="relative aspect-square bg-gray-50 p-2">
-                                <ProductImage
-                                    src={product.primaryImage}
-                                    alt={product.name}
-                                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                                    className="object-contain"
-                                />
-                                {product.certifications.length > 0 && (
-                                    <span className="absolute top-2 right-2 bg-gray-900 text-white text-[10px] font-bold px-1.5 py-1 rounded">
-                                        {product.certifications[0]}
-                                    </span>
-                                )}
-                            </div>
-                            <div className="p-3">
-                                <h3 className="font-medium text-gray-900 text-sm line-clamp-2 min-h-10">{product.name}</h3>
-                                <div className="flex items-baseline gap-2 mt-1">
-                                    <span className="text-orange-600 font-bold text-lg">KES {product.price.toLocaleString()}</span>
-                                    {product.oldPrice && (
-                                        <span className="text-gray-500 text-xs line-through">KES {product.oldPrice.toLocaleString()}</span>
+                            <Link href={`/products/${product.id}`}>
+                                <div className="relative aspect-square bg-gray-50 p-2">
+                                    <ProductImage
+                                        src={product.primaryImage}
+                                        alt={product.name}
+                                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                                        className="object-contain"
+                                    />
+                                    {product.certifications.length > 0 && (
+                                        <span className="absolute top-2 right-2 bg-gray-900 text-white text-[10px] font-bold px-1.5 py-1 rounded">
+                                            {product.certifications[0]}
+                                        </span>
                                     )}
                                 </div>
+                                <div className="p-3 pb-2">
+                                    <h3 className="font-medium text-gray-900 text-sm line-clamp-2 min-h-10">{product.name}</h3>
+                                    <div className="flex items-baseline gap-2 mt-1">
+                                        <span className="text-orange-600 font-bold text-lg">KES {product.price.toLocaleString()}</span>
+                                        {product.oldPrice && (
+                                            <span className="text-gray-500 text-xs line-through">KES {product.oldPrice.toLocaleString()}</span>
+                                        )}
+                                    </div>
+                                </div>
+                            </Link>
+                            <div className="px-3 pb-3 mt-auto">
+                                <WhatsAppProductButton
+                                    productName={product.name}
+                                    size="sm"
+                                    className="w-full"
+                                />
                             </div>
-                        </Link>
+                        </div>
                     ))}
                 </div>
             </div>

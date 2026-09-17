@@ -39,6 +39,20 @@ const WEARABLE_CATEGORIES = [
         link: "/products?category=high-vis",
         imageUrl: "https://res.cloudinary.com/dlmmsamck/image/upload/v1763933611/hi-vis-vest_maexpa.webp",
     },
+    {
+        name: "CBC Career Uniforms",
+        description: "School and career-pathway uniforms for CBC institutions",
+        link: "/products?category=cbc-uniforms",
+        // Placeholder pending real product photos.
+        imageUrl: "/placeholder-product.svg",
+    },
+    {
+        name: "Campaign & Branded Merchandise",
+        description: "Branded reflectors, caps & campaign merchandise",
+        link: "/products?category=campaign-merch",
+        // Placeholder pending real product photos.
+        imageUrl: "/placeholder-product.svg",
+    },
 ];
 
 export function SafetyCategories() {
@@ -49,14 +63,19 @@ export function SafetyCategories() {
                     Shop by Category
                 </h2>
 
-                {/* Category Grid — compact circular icons, mobile-first */}
-                <div className="grid grid-cols-3 md:grid-cols-6 gap-x-3 gap-y-6">
+                {/* Category Grid — compact circular icons, mobile-first.
+                    4-per-row on mobile (2 even rows of 4), 8-per-row on desktop
+                    (one clean row) so 8 categories never leave an awkward
+                    half-empty trailing row. */}
+                <div className="grid grid-cols-4 md:grid-cols-8 gap-x-3 gap-y-6">
                     {WEARABLE_CATEGORIES.map((category, index) => (
                         <CategoryCard
                             key={index}
                             name={category.name}
                             link={category.link}
                             imageUrl={category.imageUrl}
+                            index={index}
+                            total={WEARABLE_CATEGORIES.length}
                         />
                     ))}
                 </div>

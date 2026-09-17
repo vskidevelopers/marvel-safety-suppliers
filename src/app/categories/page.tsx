@@ -1,10 +1,22 @@
+"use client";
+
+import { useMemo } from "react";
 import Link from "next/link";
 import { CATEGORIES } from "@/lib/categories";
+import { useProducts } from "@/lib/hooks/useProducts";
 import { Shield } from "lucide-react";
 
-
-
 export default function CategoriesPage() {
+    const { products } = useProducts();
+
+    const counts = useMemo(() => {
+        const map: Record<string, number> = {};
+        for (const product of products) {
+            map[product.category] = (map[product.category] || 0) + 1;
+        }
+        return map;
+    }, [products]);
+
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
@@ -46,6 +58,9 @@ export default function CategoriesPage() {
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                                        <div className="absolute top-3 right-3 bg-white/90 text-gray-900 text-xs font-bold px-2 py-1 rounded-full">
+                                            {counts[category.id] || 0} product{counts[category.id] === 1 ? "" : "s"}
+                                        </div>
                                         <div className="absolute bottom-4 left-4">
                                             <div className="flex items-center gap-2">
                                                 <category.icon className="h-5 w-5 text-orange-400" />

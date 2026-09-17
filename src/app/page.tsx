@@ -10,6 +10,7 @@ import { TrustBadges } from "@/sections/TrustBadges";
 import { SafetyCategories } from "@/sections/SafetyCategories";
 import { FeaturedProducts } from "@/sections/featuredProducts";
 import { PartnersSection } from "@/sections/partners-section";
+import { Testimonials } from "@/sections/Testimonials";
 
 // ========== FULLSCREEN WELCOME SCREEN ==========
 function WelcomeScreen() {
@@ -237,6 +238,9 @@ export default function HomePage() {
 
       {/* Trust Badges */}
       <TrustBadges />
+
+      {/* Testimonials */}
+      <Testimonials />
 
       {/* Partners */}
       <PartnersSection />

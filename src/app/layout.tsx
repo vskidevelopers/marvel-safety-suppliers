@@ -1,9 +1,20 @@
+import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/ui/navbar";
 // import ConvexClientProvider from "./ConvexClientProvider";
 import { AuthProvider } from "./context/auth-context";
 import { Toaster } from "sonner";
 
 import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 import { Footer } from "@/components/ui/Footer";
 import { CartProvider } from "./context/cart-context";
 import WhatsAppButton from "@/components/ui/whatsapp-button";
@@ -25,9 +36,9 @@ export default async function RootLayout({
 
 
   return (
-    <html lang="en">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <meta name="google-site-verification" content="3W080oMKpfUJULfkGvH99dZuUqTUtDakTbu86wBsB8s" />
-      <body>
+      <body className="font-sans">
 
         {/* <ConvexClientProvider> */}
         <AuthProvider>

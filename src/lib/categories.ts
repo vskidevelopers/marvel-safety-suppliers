@@ -7,6 +7,8 @@ import {
   Footprints,
   Eye,
   TrafficCone,
+  GraduationCap,
+  Megaphone,
 } from "lucide-react";
 
 export const CATEGORIES = [
@@ -73,5 +75,23 @@ export const CATEGORIES = [
     image:
       "https://res.cloudinary.com/dlmmsamck/image/upload/f_auto,q_auto,w_800/v1763916341/traffic-cones.jpg",
     link: "/products?category=site",
+  },
+  {
+    id: "cbc-uniforms",
+    name: "CBC Career Uniforms",
+    description: "School and career-pathway uniforms for CBC institutions",
+    icon: GraduationCap,
+    // Placeholder pending real product photos.
+    image: "/placeholder-product.svg",
+    link: "/products?category=cbc-uniforms",
+  },
+  {
+    id: "campaign-merch",
+    name: "Campaign & Branded Merchandise",
+    description: "Branded reflectors, caps, and campaign merchandise for elections and events",
+    icon: Megaphone,
+    // Placeholder pending real product photos.
+    image: "/placeholder-product.svg",
+    link: "/products?category=campaign-merch",
   },
 ];

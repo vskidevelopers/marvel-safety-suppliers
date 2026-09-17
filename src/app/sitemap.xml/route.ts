@@ -7,7 +7,15 @@ export async function GET() {
     { url: "https://marvelsafetysuppliers.co.ke", lastModified: new Date() },
     { url: "https://marvelsafetysuppliers.co.ke/products", lastModified: new Date() },
     { url: "https://marvelsafetysuppliers.co.ke/contact", lastModified: new Date() },
-    // Add other static pages
+    { url: "https://marvelsafetysuppliers.co.ke/about", lastModified: new Date() },
+    { url: "https://marvelsafetysuppliers.co.ke/categories", lastModified: new Date() },
+    { url: "https://marvelsafetysuppliers.co.ke/corporate", lastModified: new Date() },
+    // SEO landing pages targeting high-intent search terms
+    { url: "https://marvelsafetysuppliers.co.ke/ppe-supplier-kenya", lastModified: new Date() },
+    { url: "https://marvelsafetysuppliers.co.ke/safety-boots-kenya", lastModified: new Date() },
+    { url: "https://marvelsafetysuppliers.co.ke/workwear-kenya", lastModified: new Date() },
+    { url: "https://marvelsafetysuppliers.co.ke/corporate-ppe-kenya", lastModified: new Date() },
+    { url: "https://marvelsafetysuppliers.co.ke/custom-uniforms-kenya", lastModified: new Date() },
   ];
 
   // Add dynamic product pages

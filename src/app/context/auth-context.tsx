@@ -31,26 +31,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [isAuthenticated]);
 
   const signin = async (email: string, password: string): Promise<boolean> => {
-
     try {
       // Call the login function from Firebase
       const result = await login(email, password);
-      if (!result) {
-        return false;
-      } else if (result?.success) {
-        // log("Login successful for user:", result.loggedInUser?.email);
+      if (result?.success) {
         console.log("Login successful for user:", result.loggedInUser?.email);
         setIsAuthenticated(true);
         localStorage.setItem("marvel-auth", "true");
+        return true;
       }
-      return true;
+      return false;
     } catch (error) {
-      // log("Login failed with error:", error);
       console.error("Login failed with error:", error);
+      return false;
     }
-
-
-    return false;
   };
 
   const signout = () => {

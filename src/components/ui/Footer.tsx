@@ -9,7 +9,7 @@ import { WhatsAppEnquiryMenu } from "@/components/ui/whatsapp-enquiry-menu";
 
 export function Footer() {
   const pathname = usePathname();
-  if (pathname?.startsWith("/admin")) return null;
+  if (pathname?.startsWith("/admin") || pathname?.startsWith("/pos")) return null;
 
   // Marvel Safety real categories (wearable-focused)
   const SHOP_CATEGORIES = [
@@ -20,6 +20,8 @@ export function Footer() {
     { name: "Safety Footwear", href: "/products?category=foot" },
     { name: "Visibility Wear", href: "/products?category=high-vis" },
     { name: "Site Safety Equipment", href: "/products?category=site" },
+    { name: "CBC Career Uniforms", href: "/products?category=cbc-uniforms" },
+    { name: "Campaign & Branded Merchandise", href: "/products?category=campaign-merch" },
   ];
 
   return (
@@ -90,10 +92,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-orange-500 flex-shrink-0" />
-                <div className="flex flex-col">
-                  <a href="mailto:info@marvelsafetysuppliers.co.ke" className="hover:text-orange-400 transition-colors">info@marvelsafetysuppliers.co.ke</a>
-                  <a href="mailto:marvelsafetyhub@gmail.com" className="hover:text-orange-400 transition-colors">marvelsafetyhub@gmail.com</a>
-                </div>
+                <a href="mailto:marvelsafety@gmail.com" className="hover:text-orange-400 transition-colors">marvelsafety@gmail.com</a>
               </li>
             </ul>
           </div>
@@ -141,6 +140,22 @@ export function Footer() {
                 <span className="text-xs font-medium">Nairobi Based</span>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-800 pt-6 pb-4">
+          <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-gray-500">
+            {[
+              { label: "PPE Supplier Kenya", href: "/ppe-supplier-kenya" },
+              { label: "Safety Boots Kenya", href: "/safety-boots-kenya" },
+              { label: "Workwear Kenya", href: "/workwear-kenya" },
+              { label: "Corporate PPE Kenya", href: "/corporate-ppe-kenya" },
+              { label: "Custom Uniforms Kenya", href: "/custom-uniforms-kenya" },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} className="hover:text-orange-400 transition-colors">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
 
