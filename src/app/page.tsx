@@ -11,6 +11,7 @@ import { SafetyCategories } from "@/sections/SafetyCategories";
 import { FeaturedProducts } from "@/sections/featuredProducts";
 import { PartnersSection } from "@/sections/partners-section";
 import { Testimonials } from "@/sections/Testimonials";
+import { CustomWorkwearTeaser } from "@/sections/CustomWorkwearTeaser";
 
 // ========== FULLSCREEN WELCOME SCREEN ==========
 function WelcomeScreen() {
@@ -83,8 +84,8 @@ function WelcomeScreen() {
               <Image
                 src="/images/marvel-logo.png"
                 alt="Marvel Safety Suppliers"
-                width={2081}
-                height={1081}
+                width={1146}
+                height={1115}
                 priority
                 className="h-16 w-auto"
               />
@@ -244,6 +245,9 @@ export default function HomePage() {
 
       {/* Partners */}
       <PartnersSection />
+
+      {/* Custom Workwear / Production */}
+      <CustomWorkwearTeaser />
     </div>
   );
 }

@@ -28,6 +28,8 @@ export interface SeoLandingPageProps {
     primaryCtaLabel: string;
     whatsappUrl: string;
     highlights: SeoHighlight[];
+    videoSrc?: string;
+    videoCaption?: string;
     sections: SeoSection[];
     faqs: SeoFaq[];
     bottomCtaHref: string;
@@ -42,6 +44,8 @@ export function SeoLandingPage({
     primaryCtaLabel,
     whatsappUrl,
     highlights,
+    videoSrc,
+    videoCaption,
     sections,
     faqs,
     bottomCtaHref,
@@ -101,6 +105,26 @@ export function SeoLandingPage({
                     </div>
                 </div>
             </div>
+
+            {/* Video */}
+            {videoSrc && (
+                <div className="py-10 bg-gray-50">
+                    <div className="container mx-auto px-4 max-w-2xl">
+                        <div className="rounded-xl overflow-hidden shadow-lg ring-1 ring-black/5 bg-black">
+                            <video
+                                src={videoSrc}
+                                controls
+                                preload="metadata"
+                                playsInline
+                                className="w-full aspect-video"
+                            />
+                        </div>
+                        {videoCaption && (
+                            <p className="text-center text-sm text-gray-500 mt-3">{videoCaption}</p>
+                        )}
+                    </div>
+                </div>
+            )}
 
             {/* Content sections */}
             <div className="py-12">

@@ -43,15 +43,13 @@ const WEARABLE_CATEGORIES = [
         name: "CBC Career Uniforms",
         description: "School and career-pathway uniforms for CBC institutions",
         link: "/products?category=cbc-uniforms",
-        // Placeholder pending real product photos.
-        imageUrl: "/placeholder-product.svg",
+        imageUrl: "/images/categories/cbc-career-uniform.png",
     },
     {
         name: "Campaign & Branded Merchandise",
         description: "Branded reflectors, caps & campaign merchandise",
         link: "/products?category=campaign-merch",
-        // Placeholder pending real product photos.
-        imageUrl: "/placeholder-product.svg",
+        imageUrl: "/images/categories/campaign-branded-merch.png",
     },
 ];
 

@@ -15,8 +15,8 @@ export function LogoLoader({ className = "py-16" }: { className?: string }) {
                 <Image
                     src="/images/marvel-logo.png"
                     alt="Loading"
-                    width={2081}
-                    height={1081}
+                    width={1146}
+                    height={1115}
                     className="h-10 w-auto"
                 />
             </motion.div>

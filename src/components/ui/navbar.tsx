@@ -109,8 +109,8 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                             <Image
                                 src="/images/marvel-logo.png"
                                 alt="Marvel Safety Suppliers"
-                                width={2081}
-                                height={1081}
+                                width={1146}
+                                height={1115}
                                 priority
                                 className="h-8 w-auto" // Adjust height as needed
                             />
@@ -237,8 +237,8 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                         <Image
                             src="/images/marvel-logo.png"
                             alt="Marvel Safety Suppliers"
-                            width={2081}
-                            height={1081}
+                            width={1146}
+                            height={1115}
                             priority
                             className="h-8 w-auto"
                         />
@@ -276,8 +276,8 @@ export function Navbar({ cartCount = 0, isAuthenticated = false }: NavbarProps) 
                                         <Image
                                             src="/images/marvel-logo.png"
                                             alt="Marvel Safety Suppliers"
-                                            width={2081}
-                                            height={1081}
+                                            width={1146}
+                                            height={1115}
                                             className="h-8 w-auto"
                                         />
                                     </Link>

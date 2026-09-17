@@ -16,7 +16,7 @@ export function FeaturedProducts() {
     useEffect(() => {
         let cancelled = false;
         (async () => {
-            const result = await fetchFeaturedProducts(4);
+            const result = await fetchFeaturedProducts(8);
             if (cancelled) return;
             if (result.success) setFeatured(result.data as Product[]);
             setLoading(false);

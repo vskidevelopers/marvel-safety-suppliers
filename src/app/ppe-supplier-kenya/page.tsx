@@ -67,7 +67,7 @@ export default function PpeSupplierKenyaPage() {
         highlights={[
           { icon: <Shield className="h-6 w-6" />, title: "KEBS Certified", description: "Standards-compliant PPE" },
           { icon: <Truck className="h-6 w-6" />, title: "Nationwide Delivery", description: "Direct to your site" },
-          { icon: <Award className="h-6 w-6" />, title: "15+ Years Experience", description: "Trusted across Kenya" },
+          { icon: <Award className="h-6 w-6" />, title: "5+ Years Experience", description: "Trusted across Kenya" },
           { icon: <Headset className="h-6 w-6" />, title: "WhatsApp Support", description: "Fast quotes and advice" },
         ]}
         sections={[

@@ -64,6 +64,8 @@ export default function WorkwearKenyaPage() {
         whatsappUrl={getWhatsAppEnquiryUrl(
           "Hi Marvel Safety Suppliers, I'm looking for workwear in Kenya for my team. Could you share your options and pricing?"
         )}
+        videoSrc="/videos/multipocket-reflective-vest.mp4"
+        videoCaption="Multi-pocket reflective vest for engineers"
         highlights={[
           { icon: <Shirt className="h-6 w-6" />, title: "Built to Last", description: "Durable work fabrics" },
           { icon: <Shield className="h-6 w-6" />, title: "KEBS Certified", description: "Standards-compliant wear" },

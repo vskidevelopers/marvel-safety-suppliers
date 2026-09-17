@@ -81,8 +81,7 @@ export const CATEGORIES = [
     name: "CBC Career Uniforms",
     description: "School and career-pathway uniforms for CBC institutions",
     icon: GraduationCap,
-    // Placeholder pending real product photos.
-    image: "/placeholder-product.svg",
+    image: "/images/categories/cbc-career-uniform.png",
     link: "/products?category=cbc-uniforms",
   },
   {
@@ -90,8 +89,7 @@ export const CATEGORIES = [
     name: "Campaign & Branded Merchandise",
     description: "Branded reflectors, caps, and campaign merchandise for elections and events",
     icon: Megaphone,
-    // Placeholder pending real product photos.
-    image: "/placeholder-product.svg",
+    image: "/images/categories/campaign-branded-merch.png",
     link: "/products?category=campaign-merch",
   },
 ];

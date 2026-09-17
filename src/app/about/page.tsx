@@ -107,9 +107,9 @@ const AboutPage = () => {
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                         {[
-                            { value: "40,000+", label: "Workers Protected" },
-                            { value: "200+", label: "Corporate Clients" },
-                            { value: "15", label: "Years Experience" },
+                            { value: "1,700+", label: "Workers Protected" },
+                            { value: "55+", label: "Corporate Clients" },
+                            { value: "5+", label: "Years Experience" },
                             { value: "Nationwide", label: "Delivery Coverage" }
                         ].map((stat, index) => (
                             <motion.div

@@ -64,6 +64,8 @@ export default function CustomUniformsKenyaPage() {
         whatsappUrl={getWhatsAppEnquiryUrl(
           "Hi Marvel Safety Suppliers, I'm looking for custom uniforms in Kenya. Could you share your options, branding process, and pricing?"
         )}
+        videoSrc="/videos/branded-reflectors-merch.mp4"
+        videoCaption="Branded reflectors and campaign merchandise"
         highlights={[
           { icon: <GraduationCap className="h-6 w-6" />, title: "CBC Career Uniforms", description: "For school pathway programs" },
           { icon: <Shirt className="h-6 w-6" />, title: "Custom Branding", description: "Logo embroidery available" },

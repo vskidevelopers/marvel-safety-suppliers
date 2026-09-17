@@ -63,6 +63,8 @@ export default function SafetyBootsKenyaPage() {
         whatsappUrl={getWhatsAppEnquiryUrl(
           "Hi Marvel Safety Suppliers, I'm looking for safety boots in Kenya. Could you share your available sizes and pricing?"
         )}
+        videoSrc="/videos/safety-boots.mp4"
+        videoCaption="A closer look at our safety boots"
         highlights={[
           { icon: <Footprints className="h-6 w-6" />, title: "Steel-Toe Protection", description: "Built for heavy-duty sites" },
           { icon: <Shield className="h-6 w-6" />, title: "KEBS Certified", description: "Standards-compliant footwear" },

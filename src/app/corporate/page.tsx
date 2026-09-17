@@ -30,9 +30,9 @@ const BENEFITS = [
 ];
 
 const STATS = [
-    { end: 40000, suffix: "+", label: "Workers Protected" },
-    { end: 200, suffix: "+", label: "Corporate Clients" },
-    { end: 15, suffix: "", label: "Years Experience" },
+    { end: 1700, suffix: "+", label: "Workers Protected" },
+    { end: 55, suffix: "+", label: "Corporate Clients" },
+    { end: 5, suffix: "+", label: "Years Experience" },
     { value: "Nationwide", label: "Delivery Coverage" },
 ];
 
