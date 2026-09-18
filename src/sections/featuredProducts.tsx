@@ -3,11 +3,18 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { fetchFeaturedProducts } from "@/lib/firebase";
+import { fetchFeaturedProducts, fetchProductById } from "@/lib/firebase";
 import { ProductImage } from "@/components/ui/product-image";
 import { LogoLoader } from "@/components/ui/logo-loader";
 import WhatsAppProductButton from "@/components/ui/whatsapp-product-button";
 import type { Product } from "@/app/types/product";
+
+const TOTAL_FEATURED = 8;
+
+// Manually pinned to always appear first in this section — requested
+// directly rather than built as a general "featured" toggle, since it's a
+// one-off promotion rather than an ongoing merchandising need yet.
+const PINNED_PRODUCT_IDS = ["dcRT86MOrEpCYLbP1LJG"];
 
 export function FeaturedProducts() {
     const [featured, setFeatured] = useState<Product[]>([]);
@@ -16,9 +23,24 @@ export function FeaturedProducts() {
     useEffect(() => {
         let cancelled = false;
         (async () => {
-            const result = await fetchFeaturedProducts(8);
+            const pinnedResults = await Promise.all(
+                PINNED_PRODUCT_IDS.map((id) => fetchProductById(id))
+            );
+            const pinned = pinnedResults
+                .filter((r) => r.success && r.data)
+                .map((r) => r.data as Product);
+
+            const remainingSlots = Math.max(TOTAL_FEATURED - pinned.length, 0);
+            const result = await fetchFeaturedProducts(remainingSlots + pinned.length);
             if (cancelled) return;
-            if (result.success) setFeatured(result.data as Product[]);
+
+            const rest = result.success
+                ? (result.data as Product[]).filter(
+                      (p) => !pinned.some((pinnedProduct) => pinnedProduct.id === p.id)
+                  )
+                : [];
+
+            setFeatured([...pinned, ...rest].slice(0, TOTAL_FEATURED));
             setLoading(false);
         })();
         return () => {
