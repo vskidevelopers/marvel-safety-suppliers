@@ -86,3 +86,26 @@ export function stripFormatting(text: string): string {
         .filter(Boolean)
         .join(" ");
 }
+
+/**
+ * Above-the-fold teaser that always ends on a complete sentence — never
+ * mid-word or mid-sentence. Always includes at least the first sentence in
+ * full (however long), then adds a second only if it fits within maxChars;
+ * otherwise it stops rather than slicing into it.
+ */
+export function getTeaser(text: string, maxSentences = 2, maxChars = 260): string {
+    const plain = stripFormatting(text);
+    if (!plain) return "";
+
+    const sentences = plain.match(/[^.!?]+[.!?]+(?:\s+|$)/g)?.map((s) => s.trim());
+    if (!sentences?.length) return plain;
+
+    let result = sentences[0];
+    for (let i = 1; i < Math.min(maxSentences, sentences.length); i++) {
+        const candidate = `${result} ${sentences[i]}`;
+        if (candidate.length > maxChars) break;
+        result = candidate;
+    }
+
+    return result;
+}

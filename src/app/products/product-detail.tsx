@@ -9,7 +9,7 @@ import { CartItem } from "../types/cart";
 import { useProducts } from "@/lib/hooks/useProducts";
 import WhatsAppProductButton from "@/components/ui/whatsapp-product-button";
 import { LogoLoader } from "@/components/ui/logo-loader";
-import { FormattedText, stripFormatting } from "@/lib/formatDescription";
+import { FormattedText, getTeaser } from "@/lib/formatDescription";
 import { PRODUCT_FAQS } from "@/lib/productFaqs";
 import type { Product } from "@/app/types/product";
 
@@ -208,8 +208,8 @@ export function ProductDetail({ productId, initialProduct }: ProductDetailProps)
                             <div className="text-red-600 font-medium mb-6">Out of Stock</div>
                         )}
 
-                        <p className="text-gray-600 mb-6 text-base line-clamp-2">
-                            {stripFormatting(product.description)}
+                        <p className="text-gray-600 mb-6 text-base">
+                            {getTeaser(product.description)}
                         </p>
 
                         {/* Certifications */}
