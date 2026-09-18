@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Upload, Plus, X, AlertCircle } from "lucide-react";
+import { Plus, X, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/lib/categories";
-import { useCloudinaryUpload } from "@/lib/hooks/useCloudinaryUpload";
 import { useProducts } from "@/lib/hooks/useProducts";
+import { ProductImageUploader } from "@/components/admin/ProductImageUploader";
 import { toast } from "sonner";
 
 export default function NewProductPage() {
@@ -36,11 +36,9 @@ export default function NewProductPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const [images, setImages] = useState<string[]>([]);
-    const [imagePreviews, setImagePreviews] = useState<string[]>([]);
     const [errors, setErrors] = useState<Record<string, string>>({});
     // api may be typed as an empty object in some setups; cast to any to access generated functions
     const router = useRouter();
-    const { uploadImage, isUploading, error: uploadError } = useCloudinaryUpload();
     const { createProduct } = useProducts();
 
 
@@ -72,37 +70,6 @@ export default function NewProductPage() {
                 certifications: formData.certifications.filter(c => c !== cert),
             });
         }
-    };
-
-    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!e.target.files) return;
-
-        const files = Array.from(e.target.files);
-        const uploadedUrls: string[] = [];
-        const newPreviews: string[] = [];
-
-        // Upload each file
-        for (const file of files) {
-            const result = await uploadImage(file);
-            if (result) {
-                uploadedUrls.push(result.url);
-                newPreviews.push(result.url); // Use Cloudinary URL as preview
-            }
-        }
-
-        // Update state with uploaded URLs
-        setImages(prev => [...prev, ...uploadedUrls]);
-        setImagePreviews(prev => [...prev, ...newPreviews]);
-
-        // Show success toast
-        if (uploadedUrls.length > 0) {
-            toast.success(`Uploaded ${uploadedUrls.length} image${uploadedUrls.length > 1 ? 's' : ''}`);
-        }
-    };
-
-    const removeImage = (index: number) => {
-        setImages(prev => prev.filter((_, i) => i !== index));
-        setImagePreviews(prev => prev.filter((_, i) => i !== index));
     };
 
     const validate = () => {
@@ -224,51 +191,10 @@ export default function NewProductPage() {
                     {/* Product Images */}
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                         <h2 className="font-bold text-gray-900 mb-4">Product Images</h2>
-                        <div
-                            className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:bg-gray-50 transition-colors cursor-pointer"
-                            onClick={() => document.getElementById('image-upload')?.click()}
-                        >
-                            <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                            <p className="text-sm font-medium text-gray-700">Click to upload images</p>
-                            <p className="text-xs text-gray-500">JPG, PNG, or WEBP (max 5MB)</p>
-                            <input
-                                id="image-upload"
-                                type="file"
-                                multiple
-                                accept="image/*"
-                                onChange={handleImageChange}
-                                className="hidden"
-                            />
-                        </div>
-
-                        {imagePreviews.length > 0 && (
-                            <div className="mt-4 grid grid-cols-3 gap-3">
-                                {imagePreviews.map((preview, index) => (
-                                    <div key={index} className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
-                                        <img
-                                            src={preview}
-                                            alt={`Preview ${index + 1}`}
-                                            className="w-full h-full object-cover"
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => removeImage(index)}
-                                            className="absolute -top-1.5 -right-1.5 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600"
-                                        >
-                                            <X className="h-3 w-3" />
-                                        </button>
-                                    </div>
-                                ))}
-
-                                {isUploading && (
-                                    <p className="text-gray-600 text-sm mt-2">Uploading images...</p>
-                                )}
-
-                                {uploadError && (
-                                    <p className="text-red-600 text-sm mt-2">{uploadError}</p>
-                                )}
-                            </div>
-                        )}
+                        <p className="text-xs text-gray-500 mb-3">
+                            The first image is used as the main product photo. Use the arrows on a thumbnail to reorder.
+                        </p>
+                        <ProductImageUploader images={images} onChange={setImages} />
                     </div>
 
 
@@ -320,8 +246,11 @@ export default function NewProductPage() {
                                     onChange={handleInputChange}
                                     rows={4}
                                     className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition"
-                                    placeholder="Product details, material specifications, usage instructions..."
+                                    placeholder={"Protect your hands with our **Aramid Fiber Gloves**.\n\n- Heat resistant up to 500°C\n- EN407 certified\n- Non-slip silicone grip\n\nMachine washable and built to last."}
                                 />
+                                <p className="mt-1.5 text-xs text-gray-500">
+                                    Tip: start a line with <code className="bg-gray-100 px-1 rounded">- </code> for a bullet point, and wrap text in <code className="bg-gray-100 px-1 rounded">**double asterisks**</code> to make it bold. Renders as a proper formatted list on the product page.
+                                </p>
                             </div>
                         </div>
                     </div>

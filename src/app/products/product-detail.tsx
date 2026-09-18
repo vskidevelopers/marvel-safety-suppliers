@@ -9,7 +9,11 @@ import { CartItem } from "../types/cart";
 import { useProducts } from "@/lib/hooks/useProducts";
 import WhatsAppProductButton from "@/components/ui/whatsapp-product-button";
 import { LogoLoader } from "@/components/ui/logo-loader";
+import { FormattedText, stripFormatting } from "@/lib/formatDescription";
+import { PRODUCT_FAQS } from "@/lib/productFaqs";
 import type { Product } from "@/app/types/product";
+
+type DetailTab = "description" | "specifications" | "faq";
 
 interface ProductDetailProps {
     productId: string;
@@ -23,6 +27,7 @@ export function ProductDetail({ productId, initialProduct }: ProductDetailProps)
     const [product, setProduct] = useState<Product | null>(initialProduct ?? null);
     const [selectedImage, setSelectedImage] = useState<string>(initialProduct?.primaryImage ?? "");
     const [loading, setLoading] = useState(!initialProduct);
+    const [activeTab, setActiveTab] = useState<DetailTab>("description");
 
     const { fetchProductById } = useProducts();
     const { addItem } = useCart();
@@ -203,8 +208,8 @@ export function ProductDetail({ productId, initialProduct }: ProductDetailProps)
                             <div className="text-red-600 font-medium mb-6">Out of Stock</div>
                         )}
 
-                        <p className="text-gray-700 mb-6 text-lg">
-                            {product.description}
+                        <p className="text-gray-600 mb-6 text-base line-clamp-2">
+                            {stripFormatting(product.description)}
                         </p>
 
                         {/* Certifications */}
@@ -223,39 +228,6 @@ export function ProductDetail({ productId, initialProduct }: ProductDetailProps)
                                 </div>
                             </div>
                         )}
-
-                        {/* Technical Specs */}
-                        <div className="mb-8">
-                            <h3 className="font-bold text-gray-900 mb-3">
-                                Technical Specifications
-                            </h3>
-                            <div className="grid grid-cols-2 gap-3 text-sm">
-                                {product.specs.material && (
-                                    <div>
-                                        <span className="text-gray-500">Material:</span>
-                                        <div>{product.specs.material}</div>
-                                    </div>
-                                )}
-                                {product.specs.color && (
-                                    <div>
-                                        <span className="text-gray-500">Color:</span>
-                                        <div>{product.specs.color}</div>
-                                    </div>
-                                )}
-                                {product.specs.weight && (
-                                    <div>
-                                        <span className="text-gray-500">Weight:</span>
-                                        <div>{product.specs.weight}</div>
-                                    </div>
-                                )}
-                                {product.specs.size && (
-                                    <div>
-                                        <span className="text-gray-500">Size:</span>
-                                        <div>{product.specs.size}</div>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
 
                         {/* CTA Buttons */}
                         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -284,20 +256,80 @@ export function ProductDetail({ productId, initialProduct }: ProductDetailProps)
                     </div>
                 </div>
 
-                {/* Description Section */}
+                {/* Description / Specifications / FAQ */}
                 <div className="border-t pt-8">
                     <div className="border-b border-gray-200">
                         <nav className="-mb-px flex space-x-8">
-                            <button className="pb-4 px-1 border-b-2 border-orange-600 text-orange-600 font-medium">
-                                Description
-                            </button>
+                            {([
+                                { id: "description", label: "Description" },
+                                { id: "specifications", label: "Specifications" },
+                                { id: "faq", label: "FAQ" },
+                            ] as { id: DetailTab; label: string }[]).map((tab) => (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => setActiveTab(tab.id)}
+                                    className={`pb-4 px-1 border-b-2 font-medium transition-colors ${activeTab === tab.id
+                                        ? "border-orange-600 text-orange-600"
+                                        : "border-transparent text-gray-500 hover:text-gray-700"
+                                        }`}
+                                >
+                                    {tab.label}
+                                </button>
+                            ))}
                         </nav>
                     </div>
+
                     <div className="py-6">
-                        <h3 className="text-xl font-bold text-gray-900 mb-4">
-                            Product Overview
-                        </h3>
-                        <p className="text-gray-700">{product.description}</p>
+                        {activeTab === "description" && (
+                            product.description?.trim() ? (
+                                <FormattedText text={product.description} />
+                            ) : (
+                                <p className="text-gray-500">No description available for this product yet.</p>
+                            )
+                        )}
+
+                        {activeTab === "specifications" && (
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-sm">
+                                {product.specs.material && (
+                                    <div>
+                                        <span className="text-gray-500">Material</span>
+                                        <div className="font-medium text-gray-900">{product.specs.material}</div>
+                                    </div>
+                                )}
+                                {product.specs.color && (
+                                    <div>
+                                        <span className="text-gray-500">Color</span>
+                                        <div className="font-medium text-gray-900">{product.specs.color}</div>
+                                    </div>
+                                )}
+                                {product.specs.weight && (
+                                    <div>
+                                        <span className="text-gray-500">Weight</span>
+                                        <div className="font-medium text-gray-900">{product.specs.weight}</div>
+                                    </div>
+                                )}
+                                {product.specs.size && (
+                                    <div>
+                                        <span className="text-gray-500">Size</span>
+                                        <div className="font-medium text-gray-900">{product.specs.size}</div>
+                                    </div>
+                                )}
+                                {!product.specs.material && !product.specs.color && !product.specs.weight && !product.specs.size && (
+                                    <p className="text-gray-500 col-span-full">No specifications listed for this product yet.</p>
+                                )}
+                            </div>
+                        )}
+
+                        {activeTab === "faq" && (
+                            <div className="space-y-4 max-w-2xl">
+                                {PRODUCT_FAQS.map((faq) => (
+                                    <div key={faq.question} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                                        <h4 className="font-semibold text-gray-900 mb-1.5">{faq.question}</h4>
+                                        <p className="text-gray-600 text-sm leading-relaxed">{faq.answer}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

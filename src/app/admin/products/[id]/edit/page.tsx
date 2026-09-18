@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
-import { Upload, Plus, X, AlertCircle, Loader2 } from "lucide-react";
+import { Plus, X, AlertCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES } from "@/lib/categories";
 import { updateProduct, fetchProductById } from "@/lib/firebase";
+import { ProductImageUploader } from "@/components/admin/ProductImageUploader";
 import type { Product } from "@/app/types/product";
 import { toast } from "sonner";
 
@@ -41,9 +42,7 @@ export default function EditProductPage() {
         supplier: "",
     });
 
-    const [existingImages, setExistingImages] = useState<string[]>([]);
-    const [newImages, setNewImages] = useState<File[]>([]);
-    const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+    const [images, setImages] = useState<string[]>([]);
     const [errors, setErrors] = useState<Record<string, string>>({});
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
@@ -94,7 +93,7 @@ export default function EditProductPage() {
                     // Set images
                     const allImages = [product.primaryImage, ...(product.additionalImages || [])]
                         .filter(Boolean) as string[];
-                    setExistingImages(allImages);
+                    setImages(allImages);
                 } else {
                     toast.error("Product not found");
                     router.push("/admin/products");
@@ -141,24 +140,6 @@ export default function EditProductPage() {
         }
     };
 
-    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!e.target.files) return;
-        const files = Array.from(e.target.files);
-        setNewImages(prev => [...prev, ...files]);
-
-        const previews = files.map(file => URL.createObjectURL(file));
-        setImagePreviews(prev => [...prev, ...previews]);
-    };
-
-    const removeExistingImage = (index: number) => {
-        setExistingImages(prev => prev.filter((_, i) => i !== index));
-    };
-
-    const removeNewImage = (index: number) => {
-        setNewImages(prev => prev.filter((_, i) => i !== index));
-        setImagePreviews(prev => prev.filter((_, i) => i !== index));
-    };
-
     const validate = () => {
         const newErrors: Record<string, string> = {};
 
@@ -203,8 +184,8 @@ export default function EditProductPage() {
                 },
                 sku: formData.sku,
                 supplier: formData.supplier,
-                primaryImage: existingImages[0] || "/placeholder-product.svg",
-                additionalImages: existingImages.slice(1),
+                primaryImage: images[0] || "/placeholder-product.svg",
+                additionalImages: images.slice(1),
                 status: parseInt(formData.stockCount) > 0
                     ? (parseInt(formData.stockCount) < 10 ? "low_stock" : "active")
                     : "out_of_stock",
@@ -323,8 +304,11 @@ export default function EditProductPage() {
                                     onChange={handleInputChange}
                                     rows={4}
                                     className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none transition"
-                                    placeholder="Product details, material specifications, usage instructions..."
+                                    placeholder={"Protect your hands with our **Aramid Fiber Gloves**.\n\n- Heat resistant up to 500°C\n- EN407 certified\n- Non-slip silicone grip\n\nMachine washable and built to last."}
                                 />
+                                <p className="mt-1.5 text-xs text-gray-500">
+                                    Tip: start a line with <code className="bg-gray-100 px-1 rounded">- </code> for a bullet point, and wrap text in <code className="bg-gray-100 px-1 rounded">**double asterisks**</code> to make it bold. Renders as a proper formatted list on the product page.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -605,74 +589,10 @@ export default function EditProductPage() {
                     {/* Product Images */}
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                         <h2 className="font-bold text-gray-900 mb-4">Product Images</h2>
-                        <div
-                            className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:bg-gray-50 transition-colors cursor-pointer"
-                            onClick={() => document.getElementById('image-upload')?.click()}
-                        >
-                            <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                            <p className="text-sm font-medium text-gray-700">Add new images</p>
-                            <p className="text-xs text-gray-500">JPG, PNG, or WEBP (max 5MB)</p>
-                            <input
-                                id="image-upload"
-                                type="file"
-                                multiple
-                                accept="image/*"
-                                onChange={handleImageChange}
-                                className="hidden"
-                            />
-                        </div>
-
-                        {/* Existing Images */}
-                        {existingImages.length > 0 && (
-                            <div className="mt-4">
-                                <p className="text-sm font-medium text-gray-700 mb-2">Current images</p>
-                                <div className="grid grid-cols-3 gap-3">
-                                    {existingImages.map((url, index) => (
-                                        <div key={`existing-${index}`} className="relative aspect-square">
-                                            <div className="w-full h-full bg-gray-100 rounded-lg border border-gray-200 overflow-hidden">
-                                                <img
-                                                    src={url}
-                                                    alt={`Existing ${index + 1}`}
-                                                    className="w-full h-full object-cover"
-                                                />
-                                            </div>
-                                            <button
-                                                type="button"
-                                                onClick={() => removeExistingImage(index)}
-                                                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600 z-10"
-                                            >
-                                                <X className="h-3 w-3" />
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* New Images */}
-                        {imagePreviews.length > 0 && (
-                            <div className="mt-4">
-                                <p className="text-sm font-medium text-gray-700 mb-2">New images</p>
-                                <div className="grid grid-cols-3 gap-3">
-                                    {imagePreviews.map((preview, index) => (
-                                        <div key={`new-${index}`} className="relative aspect-square bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
-                                            <img
-                                                src={preview}
-                                                alt={`New ${index + 1}`}
-                                                className="w-full h-full object-cover"
-                                            />
-                                            <button
-                                                type="button"
-                                                onClick={() => removeNewImage(index)}
-                                                className="absolute -top-1.5 -right-1.5 bg-red-500 text-white rounded-full p-0.5 hover:bg-red-600"
-                                            >
-                                                <X className="h-3 w-3" />
-                                            </button>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
+                        <p className="text-xs text-gray-500 mb-3">
+                            The first image is used as the main product photo. Use the arrows on a thumbnail to reorder.
+                        </p>
+                        <ProductImageUploader images={images} onChange={setImages} />
                     </div>
                 </div>
             </form>
