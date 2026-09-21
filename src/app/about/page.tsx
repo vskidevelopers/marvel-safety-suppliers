@@ -29,7 +29,7 @@ const AboutPage = () => {
                                 </span>
                             </h1>
                             <p className="text-xl text-gray-700 max-w-2xl mx-auto">
-                                Kenya&apos;s trusted partner for KEBS-compliant personal protective equipment since 2015
+                                Kenya&apos;s trusted partner for KEBS-compliant personal protective equipment since 2021
                             </p>
                         </motion.div>
                     </div>
@@ -94,7 +94,7 @@ const AboutPage = () => {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                                 <div className="absolute bottom-6 left-6 text-white">
-                                    <p className="text-lg font-bold">Protecting Kenyan Workers Since 2015</p>
+                                    <p className="text-lg font-bold">Protecting Kenyan Workers Since 2021</p>
                                 </div>
                             </div>
                         </motion.div>

@@ -14,7 +14,7 @@ const TOTAL_FEATURED = 8;
 // Manually pinned to always appear first in this section — requested
 // directly rather than built as a general "featured" toggle, since it's a
 // one-off promotion rather than an ongoing merchandising need yet.
-const PINNED_PRODUCT_IDS = ["dcRT86MOrEpCYLbP1LJG"];
+const PINNED_PRODUCT_IDS = ["dcRT86MOrEpCYLbP1LJG", "ex43zOSJHe3wm7TOsjlv"];
 
 export function FeaturedProducts() {
     const [featured, setFeatured] = useState<Product[]>([]);
