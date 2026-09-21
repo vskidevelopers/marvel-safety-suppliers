@@ -90,9 +90,12 @@ export function Footer() {
                   {WHATSAPP_PHONE_NUMBER}
                 </a>
               </li>
-              <li className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-orange-500 flex-shrink-0" />
-                <a href="mailto:marvelsafety@gmail.com" className="hover:text-orange-400 transition-colors">marvelsafety@gmail.com</a>
+              <li className="flex items-start gap-3">
+                <Mail className="h-5 w-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                <div className="flex flex-col">
+                  <a href="mailto:info@marvelsafetysuppliers.co.ke" className="hover:text-orange-400 transition-colors">info@marvelsafetysuppliers.co.ke</a>
+                  <a href="mailto:marvelsafetyhub@gmail.com" className="hover:text-orange-400 transition-colors">marvelsafetyhub@gmail.com</a>
+                </div>
               </li>
             </ul>
           </div>

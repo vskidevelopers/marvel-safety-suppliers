@@ -79,7 +79,8 @@ const ContactMarvel = ({
                                         <Mail className="h-5 w-5 text-orange-600 mt-0.5 flex-shrink-0" />
                                         <div>
                                             <p className="font-medium text-gray-900">Email</p>
-                                            <p className="text-gray-600">marvelsafety@gmail.com</p>
+                                            <p className="text-gray-600">info@marvelsafetysuppliers.co.ke</p>
+                                            <p className="text-gray-600">marvelsafetyhub@gmail.com</p>
                                             <p className="text-sm text-gray-500">Response within 24 hours</p>
                                         </div>
                                     </div>
