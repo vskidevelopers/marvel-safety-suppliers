@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { Resend } from "resend";
 
+// needs RESEND_API_KEY + NOTIFY_EMAIL set on Netlify (not Vercel)
 interface NotifyItem {
   name: string;
   quantity: number;
