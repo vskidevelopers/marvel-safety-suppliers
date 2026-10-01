@@ -1,8 +1,6 @@
 import { NextRequest } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 interface NotifyItem {
   name: string;
   quantity: number;
@@ -61,6 +59,13 @@ export async function POST(request: NextRequest) {
     if (!body.type || !body.customerName || !body.items) {
       return Response.json({ error: "Missing required fields" }, { status: 400 });
     }
+
+    if (!process.env.RESEND_API_KEY) {
+      console.error("❌ [Notify] RESEND_API_KEY is not set");
+      return Response.json({ error: "Email notifications are not configured" }, { status: 500 });
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     const recipients = process.env.NOTIFY_EMAIL!.split(",").map((e) => e.trim());
 
