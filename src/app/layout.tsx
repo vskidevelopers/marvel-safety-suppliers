@@ -18,6 +18,7 @@ const geistMono = Geist_Mono({
 import { Footer } from "@/components/ui/Footer";
 import { CartProvider } from "./context/cart-context";
 import WhatsAppButton from "@/components/ui/whatsapp-button";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 
 
 export default async function RootLayout({
@@ -41,6 +42,7 @@ export default async function RootLayout({
       <body className="font-sans">
 
         {/* <ConvexClientProvider> */}
+        <AnalyticsTracker />
         <AuthProvider>
           <CartProvider >
             <NavbarAny cartCount={cartCount} isAuthenticated={isAuthenticated} />

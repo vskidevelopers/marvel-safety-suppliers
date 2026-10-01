@@ -11,6 +11,29 @@ export const useOrderFunctions = () => {
     if (result.success) {
       console.log("✅ [Hook] Order created successfully!");
       console.log("✅ [Hook] Order ID:", result.orderId);
+
+      // Fire-and-forget — a failed notification email should never block
+      // the order from completing for the customer. keepalive is required
+      // here: the checkout page calls router.push() immediately after this
+      // resolves, and without it the browser can cancel the in-flight
+      // request mid-navigation before it ever reaches the server.
+      fetch("/api/notify", {
+        method: "POST",
+        keepalive: true,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "order",
+          id: result.orderId,
+          customerName: data.customer.fullName,
+          phone: data.customer.phone,
+          items: data.items.map((item) => ({
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+          })),
+          total: data.totals.grandTotal,
+        }),
+      }).catch((err) => console.error("Order notification failed:", err));
     } else {
       console.error("❌ [Hook] Order creation failed:", result.error);
     }

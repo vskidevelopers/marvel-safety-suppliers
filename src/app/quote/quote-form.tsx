@@ -44,6 +44,29 @@ export function QuoteForm() {
                     description: "We'll contact you within 24 hours.",
                 });
 
+                // Fire-and-forget — a failed notification email should never
+                // block the quote submission from completing for the customer.
+                fetch("/api/notify", {
+                    method: "POST",
+                    keepalive: true,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        type: "quote",
+                        id: result.quoteId,
+                        customerName: formData.contactPerson || formData.companyName,
+                        phone: formData.phone,
+                        items: [
+                            {
+                                name: `${formData.items || "Not specified"}${formData.estimatedQuantity ? ` (qty: ${formData.estimatedQuantity})` : ""}`,
+                                quantity: 1,
+                            },
+                        ],
+                        notes: [formData.companyName && `Company: ${formData.companyName}`, formData.location && `Location: ${formData.location}`, formData.deliveryDate && `Needed by: ${formData.deliveryDate}`, formData.notes]
+                            .filter(Boolean)
+                            .join(" | "),
+                    }),
+                }).catch((err) => console.error("Quote notification failed:", err));
+
                 setFormData({
                     companyName: "",
                     contactPerson: "",
